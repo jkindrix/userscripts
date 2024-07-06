@@ -9,14 +9,16 @@
 // @grant        none
 // @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
 // @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/custom-input-menu.js
-// @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/custom-input-menu.js
+// @downloadURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/custom-input-menu.js
 // ==/UserScript==
 
 (async function () {
     'use strict';
 
     // Wait for chatgpt.js to be ready
+    console.log('Waiting for chatgpt.js to be ready...');
     await chatgpt.isReady();
+    console.log('chatgpt.js is ready.');
 
     const menuConfig = {
         "Code": {
@@ -71,6 +73,7 @@
 
     // Create and configure the context menu
     function createContextMenu() {
+        console.log('Creating context menu...');
         const menu = document.createElement('ul');
         menu.id = 'customContextMenu';
         menu.style.position = 'absolute';
@@ -82,18 +85,25 @@
         menu.style.boxShadow = '0px 0px 10px rgba(0,0,0,0.1)';
         document.body.appendChild(menu);
 
+        console.log('Building menu...');
         buildMenu(menu, menuConfig);
+        console.log('Menu built.');
 
         document.addEventListener('click', () => {
             menu.style.display = 'none';
         });
 
-        chatgpt.getInputField().addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-            menu.style.top = `${event.pageY}px`;
-            menu.style.left = `${event.pageX}px`;
-            menu.style.display = 'block';
-        });
+        const inputField = chatgpt.getInputField();
+        if (inputField) {
+            inputField.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                menu.style.top = `${event.pageY}px`;
+                menu.style.left = `${event.pageX}px`;
+                menu.style.display = 'block';
+            });
+        } else {
+            console.log('Input field not found.');
+        }
     }
 
     // Build the menu from the configuration object
@@ -125,6 +135,7 @@
                 item.textContent = key;
                 item.style.cursor = 'pointer';
                 item.addEventListener('click', () => {
+                    console.log(`Executing action for ${key}`);
                     window[config[key]]();
                 });
                 container.appendChild(item);
@@ -134,13 +145,19 @@
 
     // Append text to the input textarea using chatgpt.js
     function appendText(text) {
+        console.log(`Appending text: ${text}`);
         const textarea = chatgpt.getInputField();
-        textarea.value += `\n${text}`;
-        chatgpt.focusInputField(); // Focus the input field after appending text
+        if (textarea) {
+            textarea.value += `\n${text}`;
+            chatgpt.focusInputField(); // Focus the input field after appending text
+        } else {
+            console.log('Input field not found.');
+        }
     }
 
     // Open the modal dialog for File Header
     function openFileHeaderModal() {
+        console.log('Opening file header modal...');
         const modal = document.createElement('div');
         modal.id = 'fileHeaderModal';
         modal.style.position = 'fixed';
@@ -171,6 +188,7 @@
         document.body.appendChild(modal);
 
         document.getElementById('cancelFileHeader').addEventListener('click', () => {
+            console.log('File header modal canceled.');
             modal.remove();
         });
 
@@ -182,13 +200,16 @@
                 headerText += `- ${checkbox.name}\n`;
             });
             appendText(headerText);
+            console.log('File header modal submitted.');
             modal.remove();
         });
     }
 
     // Initialize the script
     function init() {
+        console.log('Initializing script...');
         createContextMenu();
+        console.log('Script initialized.');
     }
 
     // Run the initialization
