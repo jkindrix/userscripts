@@ -1,18 +1,22 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      1.0.0
-// @description  Creates a custom right-click menu for ChatGPT message input area
+// @version      2.1.0
+// @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
 // @match        *://chatgpt.com/*
 // @grant        none
+// @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
 // @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/custom-input-menu.js
 // @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/custom-input-menu.js
 // ==/UserScript==
 
-(function () {
+(async function () {
     'use strict';
+
+    // Wait for chatgpt.js to be ready
+    await chatgpt.isReady();
 
     const menuConfig = {
         "Code": {
@@ -84,7 +88,7 @@
             menu.style.display = 'none';
         });
 
-        document.getElementById('prompt-textarea').addEventListener('contextmenu', (event) => {
+        chatgpt.getInputField().addEventListener('contextmenu', (event) => {
             event.preventDefault();
             menu.style.top = `${event.pageY}px`;
             menu.style.left = `${event.pageX}px`;
@@ -128,10 +132,11 @@
         }
     }
 
-    // Append text to the input textarea
+    // Append text to the input textarea using chatgpt.js
     function appendText(text) {
-        const textarea = document.getElementById('prompt-textarea');
+        const textarea = chatgpt.getInputField();
         textarea.value += `\n${text}`;
+        chatgpt.focusInputField(); // Focus the input field after appending text
     }
 
     // Open the modal dialog for File Header

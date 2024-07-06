@@ -1,18 +1,22 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      1.0.0
-// @description  Continuously monitor and click an element in ChatGPT when it appears on the page
+// @version      2.0.0
+// @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
 // @match        *://chatgpt.com/*
 // @grant        none
+// @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
 // @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
 // @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
 // ==/UserScript==
 
-(function () {
+(async function () {
     'use strict';
+
+    // Wait for chatgpt.js to be ready
+    await chatgpt.isReady();
 
     // Configuration
     const enableLogging = false; // Set to true to enable logging, false to disable
@@ -34,7 +38,7 @@
 
     // Function to click the element if it exists
     function clickElement() {
-        const element = document.querySelector(ELEMENT_SELECTOR);
+        const element = chatgpt.querySelector(ELEMENT_SELECTOR);
         if (element) {
             element.click();
             log("Element clicked");
@@ -70,7 +74,7 @@
 
     // Function to monitor the button's state
     function monitorButton() {
-        const button = document.querySelector(BUTTON_SELECTOR);
+        const button = chatgpt.querySelector(BUTTON_SELECTOR);
         if (button) {
             log("Button found, disabled:", button.disabled);
             if (!button.disabled && isScriptEnabled) {
@@ -95,7 +99,7 @@
 
     // Use MutationObserver to watch for changes in the button's state
     function observeButton() {
-        const targetButton = document.querySelector(BUTTON_SELECTOR);
+        const targetButton = chatgpt.querySelector(BUTTON_SELECTOR);
         if (targetButton) {
             log("Target button found, setting up observer");
             buttonObserver = new MutationObserver(handleMutations);

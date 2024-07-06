@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         📋 ChatGPT Copy Formatter
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      1.0.0
-// @description  Format ChatGPT response messages in the clipboard when copied using Prettier
+// @version      2.0.0
+// @description  Format ChatGPT response messages in the clipboard when copied using Prettier with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
 // @match        *://chatgpt.com/c/*
@@ -10,12 +10,16 @@
 // @run-at       document-end
 // @require      https://unpkg.com/prettier@2.7.1/standalone.js
 // @require      https://unpkg.com/prettier@2.7.1/parser-markdown.js
+// @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
 // @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
 // @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
 // ==/UserScript==
 
-(function () {
+(async function () {
     'use strict';
+
+    // Wait for chatgpt.js to be ready
+    await chatgpt.isReady();
 
     const processedButtons = new Set();
 
@@ -75,7 +79,7 @@
 
     // Function to add event listeners to all matching buttons
     function addEventListenersToButtons() {
-        const buttons = document.querySelectorAll("div[data-testid^='conversation-turn-'] .items-center span:nth-of-type(2) button.rounded-lg");
+        const buttons = chatgpt.querySelectorAll(".items-center span:nth-of-type(2) button.rounded-lg");
         let newButtonsFound = false;
 
         buttons.forEach(button => {
