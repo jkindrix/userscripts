@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.11
+// @version      2.0.12
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -210,7 +210,7 @@
                     submenu.appendChild(subcontainer);
                     container.appendChild(submenu);
 
-                    submenu.addEventListener('mouseover', (event) => {
+                    submenu.addEventListener('mouseenter', (event) => {
                         subcontainer.style.display = 'block';
 
                         // Get the submenu dimensions
@@ -242,7 +242,15 @@
                         subcontainer.style.left = `${subLeft}px`;
                     });
 
-                    submenu.addEventListener('mouseout', () => {
+                    submenu.addEventListener('mouseleave', () => {
+                        subcontainer.style.display = 'none';
+                    });
+
+                    subcontainer.addEventListener('mouseenter', () => {
+                        subcontainer.style.display = 'block';
+                    });
+
+                    subcontainer.addEventListener('mouseleave', () => {
                         subcontainer.style.display = 'none';
                     });
 
