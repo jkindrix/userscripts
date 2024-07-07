@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.1
+// @version      2.0.2
 // @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -232,7 +232,7 @@
 
         const navicon = document.getElementById('autoscroll-toggle-navicon') || document.createElement('img');
         navicon.id = 'autoscroll-toggle-navicon';
-        navicon.src = `https://raw.githubusercontent.com/jkindrix/userscripts/main/icons/autoscroll-down-arrow.png`;
+        navicon.src = `https://github.com/jkindrix/userscripts/blob/main/icons/autoscroll-down-arrow.png?raw=true`;
         navicon.style.width = '1.25rem';
         navicon.style.height = '1.25rem';
         navicon.style.marginLeft = '2px';
