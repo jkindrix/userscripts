@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.2
+// @version      2.0.3
 // @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -126,72 +126,92 @@
         updateToggleHTML();
     }
 
-    // Function to create a toggle button in the sidebar
     async function insertToggle() {
         log("Creating NAV TOGGLE div");
-        const navToggleDiv = document.createElement('div');
-        navToggleDiv.id = 'autoscroll-toggle-div';
+        const navToggleDiv = getOrCreateElementById('autoscroll-toggle-div', 'div', {
+            height: '37px',
+            margin: '2px 0',
+            userSelect: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            flexGrow: 'unset',
+            paddingLeft: '8px'
+        });
         navToggleDiv.className = 'group flex h-10 items-center gap-2 rounded-lg bg-token-sidebar-surface-primary px-2 font-semibold juice:gap-2.5 juice:font-normal hover:bg-token-sidebar-surface-secondary grow overflow-hidden text-ellipsis whitespace-nowrap text-sm text-token-text-primary';
-        navToggleDiv.style.height = '37px';
-        navToggleDiv.style.margin = '2px 0'; // add v-margins
-        navToggleDiv.style.userSelect = 'none'; // prevent highlighting
-        navToggleDiv.style.cursor = 'pointer'; // add finger cursor
-        navToggleDiv.style.display = 'flex';
-        navToggleDiv.style.flexGrow = 'unset';
-        navToggleDiv.style.paddingLeft = '8px';
 
         log("Inserting toggle into the sidebar");
-        const parentToInsertInto = document.querySelector('nav ' +
-            (isGPT4oUI ? '' : '> div:not(.invisible)')); // upper nav div
+        const parentToInsertInto = getParentToInsertInto();
         if (parentToInsertInto) {
-            if (!parentToInsertInto.contains(navToggleDiv)) {
-                parentToInsertInto.insertBefore(navToggleDiv, parentToInsertInto.children[1]);
-                log("NAV TOGGLE div inserted");
-            } else {
-                log("NAV TOGGLE div already present");
-            }
+            insertNavToggleDiv(parentToInsertInto, navToggleDiv);
         } else {
             log("Parent nav element not found");
         }
 
-        // Tweak styles
-        if (isGPT4oUI) navToggleDiv.style.flexGrow = 'unset'; // overcome OpenAI .grow
+        tweakStyles(navToggleDiv, parentToInsertInto);
+        addToggleListener(navToggleDiv);
+
+        updateToggleHTML();
+    }
+
+
+    function getParentToInsertInto() {
+        return document.querySelector('nav ' + (isGPT4oUI ? '' : '> div:not(.invisible)'));
+    }
+
+    function insertNavToggleDiv(parent, navToggleDiv) {
+        if (!parent.contains(navToggleDiv)) {
+            parent.insertBefore(navToggleDiv, parent.children[1]);
+            log("NAV TOGGLE div inserted");
+        } else {
+            log("NAV TOGGLE div already present");
+        }
+    }
+
+    function tweakStyles(navToggleDiv, parentToInsertInto) {
+        if (isGPT4oUI) navToggleDiv.style.flexGrow = 'unset';
         if (!firstLink && parentToInsertInto && parentToInsertInto.children[0]) {
             parentToInsertInto.children[0].style.marginBottom = '5px';
         }
+    }
 
-        // Add LISTENER to toggle switch/label/config/menu/auto-refresh
+    function addToggleListener(navToggleDiv) {
         navToggleDiv.onclick = () => {
             log("Toggle clicked");
-            const toggleInput = document.getElementById('autoscroll-toggle-input') || document.createElement('input');
+            const toggleInput = getOrCreateElementById('autoscroll-toggle-input', 'input')
             if (toggleInput) {
                 toggleInput.checked = !toggleInput.checked;
                 isScriptEnabled = toggleInput.checked;
                 updateToggleHTML();
-                if (isScriptEnabled) {
-                    observeButton();
-                    log("Script enabled manually");
-                } else {
-                    stopDomObserver();
-                    log("Script disabled manually");
-                }
+                handleScriptToggle(toggleInput.checked);
                 setTimeout(() => {
-                    const switchSpan = document.getElementById('autoscroll-switch-span')
-                    const knobSpan = document.getElementById('autoscroll-toggle-knob-span')
-                    const knobWidth = 13;
-
-                    switchSpan.style.backgroundColor = toggleInput.checked ? '#ad68ff' : '#ccc'
-                    switchSpan.style.boxShadow = toggleInput.checked ? '2px 1px 9px #d8a9ff' : 'none'
-                    knobSpan.style.transform = toggleInput.checked ? `translateX(${knobWidth}px) translateY(0)` : 'translateX(0)'
-                }, 1) // min delay to trigger transition fx
+                    updateToggleStyles(toggleInput.checked);
+                }, 1);
             } else {
                 log("Toggle input not found");
             }
         };
-
-        // Now call updateToggleHTML after the toggle div is added to the DOM
-        updateToggleHTML();
     }
+
+    function handleScriptToggle(isEnabled) {
+        if (isEnabled) {
+            observeButton();
+            log("Script enabled manually");
+        } else {
+            stopDomObserver();
+            log("Script disabled manually");
+        }
+    }
+
+    function updateToggleStyles(isChecked) {
+        const switchSpan = document.getElementById('autoscroll-switch-span');
+        const knobSpan = document.getElementById('autoscroll-toggle-knob-span');
+        const knobWidth = 13;
+
+        switchSpan.style.backgroundColor = isChecked ? '#ad68ff' : '#ccc';
+        switchSpan.style.boxShadow = isChecked ? '2px 1px 9px #d8a9ff' : 'none';
+        knobSpan.style.transform = isChecked ? `translateX(${knobWidth}px) translateY(0)` : 'translateX(0)';
+    }
+
 
     function updateToggleHTML() {
         log("Updating toggle HTML content");
@@ -267,7 +287,9 @@
             element = document.createElement(tagName);
             element.id = id;
         }
-        applyStyles(element, styles);
+        if (styles) {
+            applyStyles(element, styles);
+        }
         return element;
     }
 
