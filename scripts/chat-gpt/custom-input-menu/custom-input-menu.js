@@ -99,7 +99,7 @@
             modal.style.top = '50%';
             modal.style.left = '50%';
             modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.backgroundColor = '#fff';
+            modal.style.backgroundColor = '#f0f0f0';
             modal.style.border = '1px solid #ccc';
             modal.style.padding = '20px';
             modal.style.zIndex = '1001';
