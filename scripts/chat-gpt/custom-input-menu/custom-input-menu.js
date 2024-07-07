@@ -16,10 +16,16 @@
     'use strict';
 
     try {
-        // Wait for chatgpt.js to be ready
-        console.log('Waiting for chatgpt.js to be ready...');
-        await chatgpt.isReady();
-        console.log('chatgpt.js is ready.');
+        // Ensure chatgpt.js is loaded
+        console.log('Waiting for chatgpt.js to load...');
+        await new Promise((resolve) => {
+            const checkLoaded = () => {
+                if (typeof chatgpt !== 'undefined') resolve();
+                else setTimeout(checkLoaded, 50);
+            };
+            checkLoaded();
+        });
+        console.log('chatgpt.js loaded.');
 
         const menuConfig = {
             "Code": {
@@ -75,10 +81,10 @@
         // Append text to the input textarea using chatgpt.js
         function appendText(text) {
             console.log(`Appending text: ${text}`);
-            const textarea = chatgpt.getInputField();
+            const textarea = chatgpt.getChatBox();
             if (textarea) {
                 textarea.value += `\n${text}`;
-                chatgpt.focusInputField(); // Focus the input field after appending text
+                chatgpt.focusChatbar(); // Focus the input field after appending text
             } else {
                 console.log('Input field not found.');
             }
@@ -148,7 +154,7 @@
                 menu.style.display = 'none';
             });
 
-            const inputField = chatgpt.getInputField();
+            const inputField = chatgpt.getChatBox();
             if (inputField) {
                 inputField.addEventListener('contextmenu', (event) => {
                     event.preventDefault();
