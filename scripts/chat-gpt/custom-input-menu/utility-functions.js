@@ -1,4 +1,4 @@
-export async function appendText(text) {
+window.appendText = async function (text) {
     console.log(`Appending text: ${text}`);
     const textarea = chatgpt.getChatBox();
     if (textarea) {
@@ -9,7 +9,7 @@ export async function appendText(text) {
     }
 }
 
-export function openFileHeaderModal() {
+window.openFileHeaderModal = function () {
     console.log('Opening file header modal...');
     const modal = document.createElement('div');
     modal.id = 'fileHeaderModal';

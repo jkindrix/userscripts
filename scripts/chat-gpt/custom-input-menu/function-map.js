@@ -1,6 +1,4 @@
-import { appendText, openFileHeaderModal } from './functions.js';
-
-export const functionMap = {
+window.functionMap = {
     "openFileHeaderModal": openFileHeaderModal,
     "addComments": () => appendText('Add comments'),
     "addDocstring": () => appendText('Add docstring'),

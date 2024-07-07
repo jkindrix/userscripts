@@ -1,7 +1,4 @@
-import { menuConfig } from './menu-config.js';
-import { functionMap } from './function-map.js';
-
-export function createContextMenu() {
+window.createContextMenu = function () {
     console.log('Creating context menu...');
     const menu = document.createElement('ul');
     menu.id = 'customContextMenu';
@@ -63,7 +60,7 @@ export function createContextMenu() {
     }
 }
 
-function buildMenu(container, config) {
+window.buildMenu = function (container, config) {
     for (const key in config) {
         if (typeof config[key] === 'object') {
             const submenu = document.createElement('li');
