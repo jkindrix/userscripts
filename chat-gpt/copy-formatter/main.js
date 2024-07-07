@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
-// @namespace    https://github.com/jkindrix/tampermonkey-scripts
+// @namespace    https://github.com/jkindrix/userscripts
 // @version      2.0.15
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
@@ -8,12 +8,12 @@
 // @match        *://chatgpt.com/*
 // @grant        none
 // @require      https://cdn.jsdelivr.net/npm/@kudoai/chatgpt.js@2.9.3/dist/chatgpt.min.js
-// @require      https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/menu-config.js
-// @require      https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/function-map.js
-// @require      https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/utility-functions.js
-// @require      https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/menu-functions.js
-// @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/main.js
-// @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/custom-input-menu/main.js
+// @require      https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/custom-input-menu/menu-config.js
+// @require      https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/custom-input-menu/function-map.js
+// @require      https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/custom-input-menu/utility-functions.js
+// @require      https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/custom-input-menu/menu-functions.js
+// @updateURL    https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/custom-input-menu/main.js
+// @downloadURL  https://raw.githubusercontent.com/jkindrix/userscripts/main/dist/.js
 // ==/UserScript==
 
 (async function () {

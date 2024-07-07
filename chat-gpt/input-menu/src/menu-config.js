@@ -1,4 +1,4 @@
-window.menuConfig = {
+export const menuConfig = {
     "Code": {
         "Add": {
             "File Header": "openFileHeaderModal",

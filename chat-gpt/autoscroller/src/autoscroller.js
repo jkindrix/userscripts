@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
-// @namespace    https://github.com/jkindrix/tampermonkey-scripts
+// @namespace    https://github.com/jkindrix/userscripts
 // @version      2.0.0
 // @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
@@ -8,8 +8,8 @@
 // @match        *://chatgpt.com/*
 // @grant        none
 // @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
-// @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
-// @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
+// @updateURL    https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
+// @downloadURL  https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
 // ==/UserScript==
 
 (async function () {

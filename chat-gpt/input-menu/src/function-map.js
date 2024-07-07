@@ -1,4 +1,6 @@
-window.functionMap = {
+import { appendText, openFileHeaderModal } from './utility-functions.js';
+
+export const functionMap = {
     "openFileHeaderModal": openFileHeaderModal,
     "addComments": () => appendText('Add comments'),
     "addDocstring": () => appendText('Add docstring'),

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         📋 ChatGPT Copy Formatter
-// @namespace    https://github.com/jkindrix/tampermonkey-scripts
+// @namespace    https://github.com/jkindrix/userscripts
 // @version      2.0.0
 // @description  Format ChatGPT response messages in the clipboard when copied using Prettier with chatgpt.js integration
 // @author       Justin Kindrix
@@ -11,8 +11,8 @@
 // @require      https://unpkg.com/prettier@2.7.1/standalone.js
 // @require      https://unpkg.com/prettier@2.7.1/parser-markdown.js
 // @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
-// @updateURL    https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
-// @downloadURL  https://raw.githubusercontent.com/jkindrix/tampermonkey-scripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
+// @updateURL    https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
+// @downloadURL  https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/copy-formatter/copy-formatter.js
 // ==/UserScript==
 
 (async function () {
