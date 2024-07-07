@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.7
+// @version      2.0.8
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -99,7 +99,7 @@
             modal.style.top = '50%';
             modal.style.left = '50%';
             modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.backgroundColor = '#f0f0f0';
+            modal.style.backgroundColor = '#171717';
             modal.style.border = '1px solid #ccc';
             modal.style.padding = '20px';
             modal.style.zIndex = '1001';
