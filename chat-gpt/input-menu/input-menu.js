@@ -122,6 +122,11 @@
             buildMenu(menu, menuConfig, 1000); // Pass the starting z-index
             console.log('Menu built.');
 
+            // Prevent click event on menu from closing it
+            menu.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+
             document.addEventListener('click', () => {
                 menu.style.display = 'none';
             });
