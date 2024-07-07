@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.3
+// @version      2.0.4
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -72,6 +72,60 @@
             }
         };
 
+        // Append text to the input textarea using chatgpt.js
+        function appendText(text) {
+            console.log(`Appending text: ${text}`);
+            const textarea = chatgpt.getInputField();
+            if (textarea) {
+                textarea.value += `\n${text}`;
+                chatgpt.focusInputField(); // Focus the input field after appending text
+            } else {
+                console.log('Input field not found.');
+            }
+        }
+
+        // Open the modal dialog for File Header
+        function openFileHeaderModal() {
+            console.log('Opening file header modal...');
+            const modal = document.createElement('div');
+            modal.id = 'fileHeaderModal';
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.backgroundColor = '#fff';
+            modal.style.border = '1px solid #ccc';
+            modal.style.padding = '20px';
+            modal.style.zIndex = '1001';
+            modal.style.boxShadow = '0px 0px 10px rgba(0,0,0,0.1)';
+            modal.innerHTML = `
+                <h2>Add File Header</h2>
+                <form id="fileHeaderForm">
+                    <!-- ... (form elements unchanged) -->
+                    <button type="button" id="submitFileHeader">Submit</button>
+                    <button type="button" id="cancelFileHeader">Cancel</button>
+                </form>
+            `;
+            document.body.appendChild(modal);
+
+            document.getElementById('cancelFileHeader').addEventListener('click', () => {
+                console.log('File header modal canceled.');
+                modal.remove();
+            });
+
+            document.getElementById('submitFileHeader').addEventListener('click', () => {
+                const form = document.getElementById('fileHeaderForm');
+                let headerText = 'Generate a header for this code file which includes the following properties:\n\n';
+                const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+                checkboxes.forEach(checkbox => {
+                    headerText += `- ${checkbox.name}\n`;
+                });
+                appendText(headerText);
+                console.log('File header modal submitted.');
+                modal.remove();
+            });
+        }
+
         // Create and configure the context menu
         function createContextMenu() {
             console.log('Creating context menu...');
@@ -138,7 +192,7 @@
                     item.addEventListener('click', () => {
                         console.log(`Executing action for ${key}`);
                         try {
-                            window[config[key]]();
+                            eval(config[key]);  // Using eval to execute the string function names
                         } catch (error) {
                             console.error(`Error executing action for ${key}:`, error);
                         }
@@ -146,68 +200,6 @@
                     container.appendChild(item);
                 }
             }
-        }
-
-        // Append text to the input textarea using chatgpt.js
-        function appendText(text) {
-            console.log(`Appending text: ${text}`);
-            const textarea = chatgpt.getInputField();
-            if (textarea) {
-                textarea.value += `\n${text}`;
-                chatgpt.focusInputField(); // Focus the input field after appending text
-            } else {
-                console.log('Input field not found.');
-            }
-        }
-
-        // Open the modal dialog for File Header
-        function openFileHeaderModal() {
-            console.log('Opening file header modal...');
-            const modal = document.createElement('div');
-            modal.id = 'fileHeaderModal';
-            modal.style.position = 'fixed';
-            modal.style.top = '50%';
-            modal.style.left = '50%';
-            modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.backgroundColor = '#fff';
-            modal.style.border = '1px solid #ccc';
-            modal.style.padding = '20px';
-            modal.style.zIndex = '1001';
-            modal.style.boxShadow = '0px 0px 10px rgba(0,0,0,0.1)';
-            modal.innerHTML = `
-                <h2>Add File Header</h2>
-                <form id="fileHeaderForm">
-                    <label><input type="checkbox" name="name"> Name</label><br>
-                    <label><input type="checkbox" name="description"> Description</label><br>
-                    <label><input type="checkbox" name="notes"> Notes</label><br>
-                    <label><input type="checkbox" name="examples"> Examples</label><br>
-                    <label><input type="checkbox" name="author"> Author</label><br>
-                    <label><input type="checkbox" name="organization"> Organization</label><br>
-                    <label><input type="checkbox" name="created"> Created</label><br>
-                    <label><input type="checkbox" name="revision"> Revision</label><br>
-                    <label><input type="checkbox" name="license"> License</label><br>
-                    <button type="button" id="submitFileHeader">Submit</button>
-                    <button type="button" id="cancelFileHeader">Cancel</button>
-                </form>
-            `;
-            document.body.appendChild(modal);
-
-            document.getElementById('cancelFileHeader').addEventListener('click', () => {
-                console.log('File header modal canceled.');
-                modal.remove();
-            });
-
-            document.getElementById('submitFileHeader').addEventListener('click', () => {
-                const form = document.getElementById('fileHeaderForm');
-                let headerText = 'Generate a header for this code file which includes the following properties:\n\n';
-                const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked');
-                checkboxes.forEach(checkbox => {
-                    headerText += `- ${checkbox.name}\n`;
-                });
-                appendText(headerText);
-                console.log('File header modal submitted.');
-                modal.remove();
-            });
         }
 
         // Initialize the script
