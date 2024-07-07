@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.8
+// @version      2.0.9
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -140,7 +140,7 @@
             menu.style.position = 'absolute';
             menu.style.display = 'none';
             menu.style.zIndex = '1000';
-            menu.style.backgroundColor = '#fff';
+            menu.style.backgroundColor = '#171717';
             menu.style.border = '1px solid #ccc';
             menu.style.padding = '10px';
             menu.style.boxShadow = '0px 0px 10px rgba(0,0,0,0.1)';
@@ -158,8 +158,30 @@
             if (inputField) {
                 inputField.addEventListener('contextmenu', (event) => {
                     event.preventDefault();
-                    menu.style.top = `${event.pageY}px`;
-                    menu.style.left = `${event.pageX}px`;
+
+                    // Get the menu dimensions
+                    const menuWidth = menu.offsetWidth;
+                    const menuHeight = menu.offsetHeight;
+
+                    // Get the viewport dimensions
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    // Calculate the desired position
+                    let top = event.pageY;
+                    let left = event.pageX;
+
+                    // Adjust position if menu overflows off the page
+                    if (top + menuHeight > viewportHeight) {
+                        top -= menuHeight;
+                    }
+                    if (left + menuWidth > viewportWidth) {
+                        left -= menuWidth;
+                    }
+
+                    // Apply the position to the menu
+                    menu.style.top = `${top}px`;
+                    menu.style.left = `${left}px`;
                     menu.style.display = 'block';
                 });
             } else {
@@ -176,7 +198,7 @@
                     const subcontainer = document.createElement('ul');
                     subcontainer.style.display = 'none';
                     subcontainer.style.position = 'absolute';
-                    subcontainer.style.backgroundColor = '#fff';
+                    subcontainer.style.backgroundColor = '#171717';
                     subcontainer.style.border = '1px solid #ccc';
                     subcontainer.style.padding = '10px';
                     submenu.appendChild(subcontainer);
