@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.22
+// @version      2.0.23
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -28,6 +28,7 @@
         console.log('chatgpt.js loaded.');
 
         const menuConfig = {
+            "Continue": "continueResponding",
             "Code": {
                 "Add": {
                     "File Header": "openFileHeaderModal",
@@ -79,6 +80,7 @@
         };
 
         const functionMap = {
+            "continueResponding": continueResponding,
             "openFileHeaderModal": openFileHeaderModal,
             "addComments": addComments,
             "addDocstring": addDocstring,
@@ -121,11 +123,6 @@
             console.log('Building menu...');
             buildMenu(menu, menuConfig, 1000); // Pass the starting z-index
             console.log('Menu built.');
-
-            // Prevent click event on menu from closing it
-            menu.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
 
             document.addEventListener('click', () => {
                 menu.style.display = 'none';
@@ -237,6 +234,11 @@
                     submenu.style.cursor = 'default';
                     submenu.style.padding = '5px';
 
+                    // Prevent click event on menu from closing it
+                    submenu.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                    });
+
                     submenu.addEventListener('mouseenter', () => {
                         console.log('Entering submenu for:', key);
 
@@ -316,17 +318,20 @@
                     item.textContent = key;
                     item.style.cursor = 'pointer';
                     item.style.padding = '5px';
+
                     item.addEventListener('mouseenter', () => {
                         item.style.backgroundColor = '#333333'; // Slightly lighter background on hover
                         item.style.boxShadow = '0px 0px 5px rgba(0,0,0,0.3)'; // Add shadow on hover
                     });
+
                     item.addEventListener('mouseleave', () => {
                         item.style.backgroundColor = '#171717';
                         item.style.boxShadow = 'none'; // Remove shadow on leave
                     });
 
-                    item.addEventListener('click', () => {
+                    item.addEventListener('click', (event) => {
                         console.log(`Executing action for ${key}`);
+
                         try {
                             const func = functionMap[config[key]];
                             if (typeof func === 'function') {
@@ -337,6 +342,9 @@
                         } catch (error) {
                             console.error(`Error executing action for ${key}:`, error);
                         }
+
+                        // Close the menu after clicking a leaf node
+                        document.querySelector('#customContextMenu').style.display = 'none';
                     });
                     container.appendChild(item);
                 }
@@ -351,23 +359,55 @@
             modal.style.top = '50%';
             modal.style.left = '50%';
             modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.backgroundColor = '#171717';
-            modal.style.border = '1px solid #ccc';
-            modal.style.padding = '20px';
+            modal.style.backgroundColor = '#1e1e1e';
+            modal.style.border = '1px solid #444';
+            modal.style.borderRadius = '8px';
+            modal.style.padding = '30px';
             modal.style.zIndex = '1001';
-            modal.style.boxShadow = '0px 0px 10px rgba(0,0,0,0.1)';
+            modal.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            modal.style.width = '300px';
+            modal.style.boxSizing = 'border-box';
+            modal.style.color = '#fff';
             modal.innerHTML = `
-                <h2>Add File Header</h2>
-                <form id="fileHeaderForm">
-                    <input type="checkbox" name="Title" id="title"><label for="title">Title</label><br>
-                    <input type="checkbox" name="Author" id="author"><label for="author">Author</label><br>
-                    <input type="checkbox" name="Date" id="date"><label for="date">Date</label><br>
-                    <input type="checkbox" name="Description" id="description"><label for="description">Description</label><br>
-                    <button type="button" id="submitFileHeader">Submit</button>
-                    <button type="button" id="cancelFileHeader">Cancel</button>
-                </form>
-            `;
+    <h2 style="margin-top: 0; margin-bottom: 20px; font-size: 1.5em;">Add File Header</h2>
+    <form id="fileHeaderForm" style="display: flex; flex-direction: column;">
+        <label for="title" style="margin-bottom: 10px;">
+            <input type="checkbox" name="Title" id="title" style="margin-right: 10px;" checked> Title
+        </label>
+        <label for="author" style="margin-bottom: 10px;">
+            <input type="checkbox" name="Author" id="author" style="margin-right: 10px;" checked> Author
+        </label>
+        <label for="date" style="margin-bottom: 10px;">
+            <input type="checkbox" name="Date" id="date" style="margin-right: 10px;" checked> Date
+        </label>
+        <label for="description" style="margin-bottom: 30px;">
+            <input type="checkbox" name="Description" id="description" style="margin-right: 10px;" checked> Description
+        </label>
+        <div style="display: flex; justify-content: space-between;">
+            <button type="button" id="submitFileHeader" style="padding: 10px 20px; background-color: #3e9352; border: none; border-radius: 4px; color: #fff; cursor: pointer;">Submit</button>
+            <button type="button" id="cancelFileHeader" style="padding: 10px 20px; background-color: #dc3848; border: none; border-radius: 4px; color: #fff; cursor: pointer;">Cancel</button>
+        </div>
+    </form>
+`;
             document.body.appendChild(modal);
+
+            // Adding hover effect using JavaScript
+            const submitButton = document.getElementById('submitFileHeader');
+            const cancelButton = document.getElementById('cancelFileHeader');
+
+            submitButton.addEventListener('mouseover', () => {
+                submitButton.style.backgroundColor = '#155624';
+            });
+            submitButton.addEventListener('mouseout', () => {
+                submitButton.style.backgroundColor = '#3e9352';
+            });
+
+            cancelButton.addEventListener('mouseover', () => {
+                cancelButton.style.backgroundColor = '#931a26';
+            });
+            cancelButton.addEventListener('mouseout', () => {
+                cancelButton.style.backgroundColor = '#dc3848';
+            });
 
             document.getElementById('cancelFileHeader').addEventListener('click', () => {
                 console.log('File header modal canceled.');
@@ -388,6 +428,10 @@
         }
 
         // Define functions for each leaf node in the function map
+        async function continueResponding() {
+            chatgpt.send('Continue');
+        }
+
         async function addComments() {
             await appendText('Add comments');
         }
