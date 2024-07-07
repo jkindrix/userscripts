@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.10
+// @version      2.0.11
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -210,8 +210,36 @@
                     submenu.appendChild(subcontainer);
                     container.appendChild(submenu);
 
-                    submenu.addEventListener('mouseover', () => {
+                    submenu.addEventListener('mouseover', (event) => {
                         subcontainer.style.display = 'block';
+
+                        // Get the submenu dimensions
+                        const subWidth = subcontainer.offsetWidth;
+                        const subHeight = subcontainer.offsetHeight;
+
+                        // Get the viewport dimensions
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+
+                        // Calculate the desired position
+                        let subTop = submenu.offsetTop;
+                        let subLeft = submenu.offsetLeft + submenu.offsetWidth;
+
+                        // Adjust position if submenu overflows off the page
+                        if (subTop + subHeight > viewportHeight) {
+                            subTop = viewportHeight - subHeight;
+                        }
+                        if (subLeft + subWidth > viewportWidth) {
+                            subLeft = submenu.offsetLeft - subWidth;
+                        }
+
+                        // Ensure the submenu does not go off the top or left edge
+                        subTop = Math.max(0, subTop);
+                        subLeft = Math.max(0, subLeft);
+
+                        // Apply the position to the submenu
+                        subcontainer.style.top = `${subTop}px`;
+                        subcontainer.style.left = `${subLeft}px`;
                     });
 
                     submenu.addEventListener('mouseout', () => {
