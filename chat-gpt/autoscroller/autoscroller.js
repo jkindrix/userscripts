@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.0
+// @version      2.0.1
 // @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
 // @match        *://chatgpt.com/*
 // @grant        none
-// @require      https://cdn.jsdelivr.net/npm/chatgpt.js@latest
+// @require      https://cdn.jsdelivr.net/npm/@kudoai/chatgpt.js@2.9.3/dist/chatgpt.min.js
 // @updateURL    https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
 // @downloadURL  https://raw.githubusercontent.com/jkindrix/userscripts/main/scripts/chat-gpt/autoscroller/autoscroller.js
 // ==/UserScript==
@@ -16,13 +16,12 @@
     'use strict';
 
     // Wait for chatgpt.js to be ready
-    await chatgpt.isReady();
+    await chatgpt.isLoaded();
 
     // Configuration
     const enableLogging = false; // Set to true to enable logging, false to disable
 
     // CSS selectors
-    const BUTTON_SELECTOR = "button[data-testid='fruitjuice-send-button']";
     const ELEMENT_SELECTOR = "button.bg-token-main-surface-primary";
 
     let domObserver;
@@ -38,7 +37,7 @@
 
     // Function to click the element if it exists
     function clickElement() {
-        const element = chatgpt.querySelector(ELEMENT_SELECTOR);
+        const element = chatgpt.getSendButton();
         if (element) {
             element.click();
             log("Element clicked");
@@ -74,7 +73,7 @@
 
     // Function to monitor the button's state
     function monitorButton() {
-        const button = chatgpt.querySelector(BUTTON_SELECTOR);
+        const button = chatgpt.getSendButton();
         if (button) {
             log("Button found, disabled:", button.disabled);
             if (!button.disabled && isScriptEnabled) {
@@ -99,7 +98,7 @@
 
     // Use MutationObserver to watch for changes in the button's state
     function observeButton() {
-        const targetButton = chatgpt.querySelector(BUTTON_SELECTOR);
+        const targetButton = chatgpt.getSendButton();
         if (targetButton) {
             log("Target button found, setting up observer");
             buttonObserver = new MutationObserver(handleMutations);
