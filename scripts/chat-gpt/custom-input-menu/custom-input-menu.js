@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Custom Input Menu
 // @namespace    https://github.com/jkindrix/tampermonkey-scripts
-// @version      2.0.12
+// @version      2.0.13
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -31,51 +31,79 @@
             "Code": {
                 "Add": {
                     "File Header": "openFileHeaderModal",
-                    "Comments": "appendText('Add comments')",
-                    "Docstring": "appendText('Add docstring')"
+                    "Comments": "addComments",
+                    "Docstring": "addDocstring"
                 },
                 "Create": {
                     "Application": {
-                        "Desktop": "appendText('Create desktop application')",
-                        "Mobile": "appendText('Create mobile application')",
-                        "Web": "appendText('Create web application')"
+                        "Desktop": "createDesktopApp",
+                        "Mobile": "createMobileApp",
+                        "Web": "createWebApp"
                     },
-                    "Class/Object": "appendText('Create class/object')",
-                    "Function/Method": "appendText('Create function/method')",
-                    "Script": "appendText('Create script')"
+                    "Class/Object": "createClassObject",
+                    "Function/Method": "createFunctionMethod",
+                    "Script": "createScript"
                 },
                 "Refactor": {
                     "Modularize": {
-                        "Classes": "appendText('Modularize classes')",
-                        "Functions": "appendText('Modularize functions')",
-                        "Files": "appendText('Modularize files')"
+                        "Classes": "modularizeClasses",
+                        "Functions": "modularizeFunctions",
+                        "Files": "modularizeFiles"
                     }
                 },
                 "Remove": {
-                    "Comments": "appendText('Remove comments')",
-                    "Redundancy": "appendText('Remove redundancy')"
+                    "Comments": "removeComments",
+                    "Redundancy": "removeRedundancy"
                 },
                 "Optimize": {
-                    "Performance": "appendText('Optimize performance')",
-                    "Readability": "appendText('Optimize readability')"
+                    "Performance": "optimizePerformance",
+                    "Readability": "optimizeReadability"
                 },
                 "Translate": {
                     "Language": {
-                        "Human": "appendText('Translate to human language')",
-                        "Programming": "appendText('Translate to programming language')"
+                        "Human": "translateToHumanLanguage",
+                        "Programming": "translateToProgrammingLanguage"
                     }
                 }
             },
             "Explain": {
-                "Concept": "appendText('Explain concept')",
-                "Interaction": "appendText('Explain interaction')",
-                "Relationship": "appendText('Explain relationship')"
+                "Concept": "explainConcept",
+                "Interaction": "explainInteraction",
+                "Relationship": "explainRelationship"
             },
             "List": {
-                "Verbs (Actions)": "appendText('Generate a list of verbs (actions)')",
-                "Nouns (Objects)": "appendText('Generate a list of nouns (objects)')",
-                "Adjectives (Properties)": "appendText('Generate a list of adjectives (properties)')"
+                "Verbs (Actions)": "listVerbs",
+                "Nouns (Objects)": "listNouns",
+                "Adjectives (Properties)": "listAdjectives"
             }
+        };
+
+        // Function map
+        const functionMap = {
+            "openFileHeaderModal": openFileHeaderModal,
+            "addComments": () => appendText('Add comments'),
+            "addDocstring": () => appendText('Add docstring'),
+            "createDesktopApp": () => appendText('Create desktop application'),
+            "createMobileApp": () => appendText('Create mobile application'),
+            "createWebApp": () => appendText('Create web application'),
+            "createClassObject": () => appendText('Create class/object'),
+            "createFunctionMethod": () => appendText('Create function/method'),
+            "createScript": () => appendText('Create script'),
+            "modularizeClasses": () => appendText('Modularize classes'),
+            "modularizeFunctions": () => appendText('Modularize functions'),
+            "modularizeFiles": () => appendText('Modularize files'),
+            "removeComments": () => appendText('Remove comments'),
+            "removeRedundancy": () => appendText('Remove redundancy'),
+            "optimizePerformance": () => appendText('Optimize performance'),
+            "optimizeReadability": () => appendText('Optimize readability'),
+            "translateToHumanLanguage": () => appendText('Translate to human language'),
+            "translateToProgrammingLanguage": () => appendText('Translate to programming language'),
+            "explainConcept": () => appendText('Explain concept'),
+            "explainInteraction": () => appendText('Explain interaction'),
+            "explainRelationship": () => appendText('Explain relationship'),
+            "listVerbs": () => appendText('Generate a list of verbs (actions)'),
+            "listNouns": () => appendText('Generate a list of nouns (objects)'),
+            "listAdjectives": () => appendText('Generate a list of adjectives (properties)')
         };
 
         // Append text to the input textarea using chatgpt.js
@@ -262,7 +290,12 @@
                     item.addEventListener('click', () => {
                         console.log(`Executing action for ${key}`);
                         try {
-                            eval(config[key]);  // Using eval to execute the string function names
+                            const func = functionMap[config[key]];
+                            if (typeof func === 'function') {
+                                func();
+                            } else {
+                                console.error(`Function ${config[key]} not found in function map.`);
+                            }
                         } catch (error) {
                             console.error(`Error executing action for ${key}:`, error);
                         }
