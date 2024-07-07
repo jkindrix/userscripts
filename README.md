@@ -1,7 +1,7 @@
 
-# TamperMonkey Scripts
+# Userscripts
 
-A collection of TamperMonkey scripts designed to enhance your web browsing experience by adding custom functionalities and automations.
+A collection of personal Userscripts designed to enhance my web browsing experience by adding custom functionalities and automations.
 
 ## Table of Contents
 
@@ -59,7 +59,7 @@ Formats copied text from Chat-GPT for better readability and presentation.
 
 ### Custom Input Menu
 
-**Path**: `scripts/chat-gpt/custom-input-menu/custom-input-menu.js`
+**Path**: `scripts/chat-gpt/custom-input-menu/main.js`
 
 Adds a custom input menu to the Chat-GPT interface for quick access to predefined inputs.
 
