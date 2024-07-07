@@ -23,7 +23,7 @@
 
     let domObserver;
     let buttonObserver;
-    let isScriptEnabled = true; // Initially enable the script
+    let isScriptEnabled = false; // Initially enable the script
 
     const isGPT4oUI = document.documentElement.className.includes(' ');
     const firstLink = chatgpt.getNewChatLink();
@@ -163,7 +163,7 @@
         // Add LISTENER to toggle switch/label/config/menu/auto-refresh
         navToggleDiv.onclick = () => {
             log("Toggle clicked");
-            const toggleInput = document.getElementById('autoscroll-toggle-input');
+            const toggleInput = document.getElementById('autoscroll-toggle-input') || document.createElement('input');
             if (toggleInput) {
                 toggleInput.checked = !toggleInput.checked;
                 isScriptEnabled = toggleInput.checked;
@@ -175,6 +175,15 @@
                     stopDomObserver();
                     log("Script disabled manually");
                 }
+                setTimeout(() => {
+                    const switchSpan = document.getElementById('autoscroll-switch-span')
+                    const knobSpan = document.getElementById('autoscroll-toggle-knob-span')
+                    const knobWidth = 13;
+
+                    switchSpan.style.backgroundColor = toggleInput.checked ? '#ad68ff' : '#ccc'
+                    switchSpan.style.boxShadow = toggleInput.checked ? '2px 1px 9px #d8a9ff' : 'none'
+                    knobSpan.style.transform = toggleInput.checked ? `translateX(${knobWidth}px) translateY(0)` : 'translateX(0)'
+                }, 1) // min delay to trigger transition fx
             } else {
                 log("Toggle input not found");
             }
@@ -186,57 +195,58 @@
 
     function updateToggleHTML() {
         log("Updating toggle HTML content");
-        const toggleInput = document.getElementById('autoscroll-toggle-input') || document.createElement('input');
-        toggleInput.id = 'autoscroll-toggle-input';
-        toggleInput.type = 'checkbox';
-        toggleInput.style.display = 'none';
-        toggleInput.disabled = true;
-        toggleInput.checked = isScriptEnabled;
 
-        const switchSpan = document.getElementById('autoscroll-switch-span') || document.createElement('span');
-        switchSpan.id = 'autoscroll-switch-span';
-        switchSpan.style.position = 'relative';
-        switchSpan.style.left = '147px';
-        switchSpan.style.backgroundColor = '#ccc';
-        switchSpan.style.bottom = '0em';
-        switchSpan.style.width = '30px';
-        switchSpan.style.height = '15px';
-        switchSpan.style.transition = 'all 0.4s ease';
-        switchSpan.style.borderRadius = '28px';
-        switchSpan.style.boxShadow = 'none';
+        const toggleInput = getOrCreateElementById('autoscroll-toggle-input', 'input', {
+            type: 'checkbox',
+            display: 'none',
+            disabled: true,
+            checked: isScriptEnabled
+        });
 
-        const knobSpan = document.getElementById('autoscroll-toggle-knob-span') || document.createElement('span');
-        knobSpan.id = 'autoscroll-toggle-knob-span';
-        knobSpan.style.position = 'absolute';
-        knobSpan.style.left = '3px';
-        knobSpan.style.bottom = '0.055em';
-        knobSpan.style.width = '13px';
-        knobSpan.style.height = '13px';
-        knobSpan.style.content = '';
-        knobSpan.style.borderRadius = '28px';
-        knobSpan.style.backgroundColor = 'white';
-        knobSpan.style.transition = 'all 0.4s ease';
-        knobSpan.style.transform = 'translateX(0px)';
+        const switchSpan = getOrCreateElementById('autoscroll-switch-span', 'span', {
+            position: 'relative',
+            left: '147px',
+            backgroundColor: '#ccc',
+            bottom: '0em',
+            width: '30px',
+            height: '15px',
+            transition: 'all 0.4s ease',
+            borderRadius: '28px',
+            boxShadow: 'none'
+        });
+
+        const knobSpan = getOrCreateElementById('autoscroll-toggle-knob-span', 'span', {
+            position: 'absolute',
+            left: '3px',
+            bottom: '0.055em',
+            width: '13px',
+            height: '13px',
+            content: '',
+            borderRadius: '28px',
+            backgroundColor: 'white',
+            transition: 'all 0.4s ease',
+            transform: 'translateX(0px)'
+        });
 
         switchSpan.appendChild(knobSpan);
 
-        const toggleLabel = document.getElementById('autoscroll-toggle-label') || document.createElement('label');
-        toggleLabel.id = 'autoscroll-toggle-label';
-        toggleLabel.style.marginLeft = '-41px';
-        toggleLabel.style.cursor = 'pointer';
-        toggleLabel.style.width = '145px';
-        toggleLabel.style.overflow = 'hidden';
-        toggleLabel.style.textOverflow = 'ellipsis';
+        const toggleLabel = getOrCreateElementById('autoscroll-toggle-label', 'label', {
+            marginLeft: '-41px',
+            cursor: 'pointer',
+            width: '145px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+        });
 
-        toggleLabel.textContent = `Autoscroll Mode ${toggleInput.checked ? 'enabled' : 'disabled'}`;
+        toggleLabel.textContent = `Auto-Scroll ${toggleInput.checked ? 'enabled' : 'disabled'}`;
 
-        const navicon = document.getElementById('autoscroll-toggle-navicon') || document.createElement('img');
-        navicon.id = 'autoscroll-toggle-navicon';
+        const navicon = getOrCreateElementById('autoscroll-toggle-navicon', 'img', {
+            width: '1.25rem',
+            height: '1.25rem',
+            marginLeft: '2px',
+            marginRight: '4px'
+        });
         navicon.src = `https://github.com/jkindrix/userscripts/blob/main/icons/autoscroll-down-arrow.png?raw=true`;
-        navicon.style.width = '1.25rem';
-        navicon.style.height = '1.25rem';
-        navicon.style.marginLeft = '2px';
-        navicon.style.marginRight = '4px';
 
         const navToggleDiv = document.getElementById('autoscroll-toggle-div');
         if (navToggleDiv) {
@@ -250,6 +260,23 @@
             log("NAV TOGGLE div not found for updating HTML content");
         }
     }
+
+    function getOrCreateElementById(id, tagName, styles) {
+        let element = document.getElementById(id);
+        if (!element) {
+            element = document.createElement(tagName);
+            element.id = id;
+        }
+        applyStyles(element, styles);
+        return element;
+    }
+
+    function applyStyles(element, styles) {
+        for (const [key, value] of Object.entries(styles)) {
+            element.style[key] = value;
+        }
+    }
+
 
     // Function to start the whole process
     function init() {
