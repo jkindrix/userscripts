@@ -431,7 +431,7 @@
 
     // Define functions for each leaf node in the function map
     async function continueResponding() {
-        chatgpt.continue();
+        await appendText('Continue');
     }
 
     async function addComments() {
