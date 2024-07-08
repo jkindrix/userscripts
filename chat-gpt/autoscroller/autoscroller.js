@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🔄 ChatGPT Autoscroller
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.3
+// @version      2.0.4
 // @description  Continuously monitor and click an element in ChatGPT when it appears on the page with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
