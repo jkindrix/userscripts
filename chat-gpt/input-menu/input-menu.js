@@ -28,7 +28,6 @@
     // Wait for chatgpt.js to be ready
     await chatgpt.isLoaded();
 
-
     const menuConfig = {
         "Continue": "continueResponding",
         "Code": {
@@ -108,6 +107,20 @@
         "listNouns": listNouns,
         "listAdjectives": listAdjectives
     };
+
+    const templates = {
+        "What is this?": '- What is this?: "$placeholder"\n',
+        "What did you mean?": '- What did you mean by this?: "$placeholder"\n',
+        "Can you give some examples?": '- Can you give me some examples of this?: "$placeholder"\n'
+    };
+
+    function createQuestionFromTemplate(copiedText, templateName) {
+        const template = templates[templateName];
+        if (!template) {
+            throw new Error("Template not found");
+        }
+        return template.replace('$placeholder', copiedText);
+    }
 
     function createContextMenu() {
         log('Creating context menu...');
@@ -217,11 +230,80 @@
             }
         }
 
+        function attachSecondaryContextMenu() {
+            document.addEventListener('contextmenu', (event) => {
+                if (!event.ctrlKey) {
+                    return;
+                }
+
+                const selectedText = window.getSelection().toString().trim();
+                if (selectedText.length === 0) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                // Remove existing custom context menu if present
+                const existingMenu = document.querySelector('.custom-context-menu');
+                if (existingMenu) {
+                    existingMenu.remove();
+                }
+
+                // Create the custom context menu
+                const menu = document.createElement('ul');
+                menu.className = 'custom-context-menu';
+                menu.style.position = 'absolute';
+                menu.style.top = `${event.pageY}px`;
+                menu.style.left = `${event.pageX}px`;
+                menu.style.backgroundColor = '#171717';
+                menu.style.border = '1px solid #ccc';
+                menu.style.listStyle = 'none';
+                menu.style.padding = '10px';
+                menu.style.zIndex = '10000';
+
+                Object.keys(templates).forEach((menuItem) => {
+                    const menuItemElement = document.createElement('li');
+                    menuItemElement.textContent = menuItem;
+                    menuItemElement.style.padding = '5px';
+                    menuItemElement.style.cursor = 'pointer';
+                    menuItemElement.style.backgroundColor = '#171717';
+                    menuItemElement.style.boxShadow = 'none';
+
+                    menuItemElement.addEventListener('mouseenter', () => {
+                        menuItemElement.style.backgroundColor = '#333333'; // Slightly lighter background on hover
+                        menuItemElement.style.boxShadow = '0px 0px 5px rgba(0,0,0,0.3)'; // Add shadow on hover
+                    });
+
+                    menuItemElement.addEventListener('mouseleave', () => {
+                        menuItemElement.style.backgroundColor = '#171717';
+                        menuItemElement.style.boxShadow = 'none'; // Remove shadow on leave
+                    });
+
+                    menuItemElement.addEventListener('click', async () => {
+                        await navigator.clipboard.writeText(selectedText);
+                        const question = createQuestionFromTemplate(selectedText, menuItem);
+                        appendText(question);
+                        menu.remove();
+                    });
+                    menu.appendChild(menuItemElement);
+                });
+
+                document.body.appendChild(menu);
+
+                // Remove the menu if clicked outside
+                document.addEventListener('click', () => {
+                    menu.remove();
+                }, { once: true });
+            });
+        }
+
         attachContextMenu();
+        attachSecondaryContextMenu();
 
         // Re-attach the context menu when navigating between chats
         const observer = new MutationObserver(() => {
             attachContextMenu();
+            attachSecondaryContextMenu();
         });
         observer.observe(document.querySelector('main'), { childList: true, subtree: true });
     }
