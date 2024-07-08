@@ -20,7 +20,7 @@
     // Function for logging
     function log(message) {
         if (enableLogging) {
-            log(message);
+            console.log(message);
         }
     }
 
