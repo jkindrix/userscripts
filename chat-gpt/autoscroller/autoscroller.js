@@ -19,7 +19,7 @@
     await chatgpt.isLoaded();
 
     // Configuration
-    const enableLogging = true; // Set to true to enable logging, false to disable
+    const enableLogging = false; // Set to true to enable logging, false to disable
 
     let domObserver;
     let buttonObserver;
