@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.26
+// @version      2.0.27
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -52,6 +52,9 @@
                     "Functions": "modularizeFunctions",
                     "Files": "modularizeFiles"
                 },
+                "Organize": {
+                    "Consolidate": "consolidateContent"
+                },
                 "Remove": {
                     "Comments": "removeComments",
                     "Redundancy": "removeRedundancy"
@@ -85,6 +88,7 @@
         "openFileHeaderModal": openFileHeaderModal,
         "addComments": addComments,
         "addDocstring": addDocstring,
+        "consolidateContent": consolidateContent,
         "createDesktopApp": createDesktopApp,
         "createMobileApp": createMobileApp,
         "createWebApp": createWebApp,
@@ -513,99 +517,103 @@
 
     // Define functions for each leaf node in the function map
     async function continueResponding() {
-        await appendText('Continue');
+        await appendText('Please continue the response.');
     }
 
     async function addComments() {
-        await appendText('Add comments');
+        await appendText('Please add comments to the code:\n\n');
     }
 
     async function addDocstring() {
-        await appendText('Add docstring');
+        await appendText('Please add a docstring to the code:\n\n');
+    }
+
+    async function consolidateContent() {
+        await appendText('Please organize, optimize, consolidate, and deduplicate the content:\n\n');
     }
 
     async function createDesktopApp() {
-        await appendText('Create desktop application');
+        await appendText('Please create a desktop application:\n\n');
     }
 
     async function createMobileApp() {
-        await appendText('Create mobile application');
+        await appendText('Please create a mobile application:\n\n');
     }
 
     async function createWebApp() {
-        await appendText('Create web application');
+        await appendText('Please create a web application:\n\n');
     }
 
     async function createClassObject() {
-        await appendText('Create class/object');
+        await appendText('Please create a class/object:\n\n');
     }
 
     async function createFunctionMethod() {
-        await appendText('Create function/method');
+        await appendText('Please create a function/method:\n\n');
     }
 
     async function createScript() {
-        await appendText('Create script');
+        await appendText('Please create a script:\n\n');
     }
 
     async function modularizeClasses() {
-        await appendText('Modularize classes');
+        await appendText('Please modularize the classes:\n\n');
     }
 
     async function modularizeFunctions() {
-        await appendText('Modularize functions');
+        await appendText('Please modularize the functions:\n\n');
     }
 
     async function modularizeFiles() {
-        await appendText('Modularize files');
+        await appendText('Please modularize the files:\n\n');
     }
 
     async function removeComments() {
-        await appendText('Remove comments');
+        await appendText('Please remove comments from the code:\n\n');
     }
 
     async function removeRedundancy() {
-        await appendText('Remove redundancy');
+        await appendText('Please remove redundancy from the content:\n\n');
     }
 
     async function optimizePerformance() {
-        await appendText('Optimize performance');
+        await appendText('Please optimize the performance:\n\n');
     }
 
     async function optimizeReadability() {
-        await appendText('Optimize readability');
+        await appendText('Please optimize the readability:\n\n');
     }
 
     async function translateToHumanLanguage() {
-        await appendText('Translate to human language');
+        await appendText('Please translate the content to human-readable language:\n\n');
     }
 
     async function translateToProgrammingLanguage() {
-        await appendText('Translate to programming language');
+        await appendText('Please translate the content to the specified programming language:\n\n');
     }
 
     async function explainConcept() {
-        await appendText('Explain concept');
+        await appendText('Please explain the concept:\n\n');
     }
 
     async function explainInteraction() {
-        await appendText('Explain interaction');
+        await appendText('Please explain the interaction:\n\n');
     }
 
     async function explainRelationship() {
-        await appendText('Explain relationship');
+        await appendText('Please explain the relationship:\n\n');
     }
 
     async function listVerbs() {
-        await appendText('Generate a list of verbs (actions)');
+        await appendText('Please generate a list of verbs (actions):\n\n');
     }
 
     async function listNouns() {
-        await appendText('Generate a list of nouns (objects)');
+        await appendText('Please generate a list of nouns (objects):\n\n');
     }
 
     async function listAdjectives() {
-        await appendText('Generate a list of adjectives (properties)');
+        await appendText('Please generate a list of adjectives (properties):\n\n');
     }
 
     async function appendText(text) {
