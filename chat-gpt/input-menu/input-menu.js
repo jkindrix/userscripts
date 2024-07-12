@@ -36,6 +36,9 @@
                 "Comments": "addComments",
                 "Docstring": "addDocstring"
             },
+            "Analyze": {
+                "Identify Code Smells": "identifyCodeSmells"
+            },
             "Create": {
                 "Application": {
                     "Desktop": "createDesktopApp",
@@ -53,6 +56,7 @@
                     "Files": "modularizeFiles"
                 },
                 "Organize": {
+                    "Alphabetically": "organizeAlphabetically",
                     "Consolidate": "consolidateContent"
                 },
                 "Remove": {
@@ -70,6 +74,9 @@
                     }
                 }
             },
+            "Update": {
+                "Copy Example": "copyExample"
+            }
         },
         "Explain": {
             "Concept": "explainConcept",
@@ -97,6 +104,7 @@
         "createFunctionMethod": createFunctionMethod,
         "createScript": createScript,
         "ensureBestPractices": ensureBestPractices,
+        "identifyCodeSmells": identifyCodeSmells,
         "modularizeClasses": modularizeClasses,
         "modularizeFunctions": modularizeFunctions,
         "modularizeFiles": modularizeFiles,
@@ -104,6 +112,7 @@
         "removeRedundancy": removeRedundancy,
         "optimizePerformance": optimizePerformance,
         "optimizeReadability": optimizeReadability,
+        "organizeAlphabetically": organizeAlphabetically,
         "translateToHumanLanguage": translateToHumanLanguage,
         "translateToProgrammingLanguage": translateToProgrammingLanguage,
         "explainConcept": explainConcept,
@@ -119,6 +128,170 @@
         "What did you mean?": '- What did you mean by this?: "$placeholder"\n',
         "Can you give some examples?": '- Can you give me some examples of this?: "$placeholder"\n'
     };
+
+    // Define functions for each leaf node in the function map
+
+    async function appendText(text) {
+        log(`Appending text: ${text}`);
+        const textarea = chatgpt.getChatBox();
+        if (textarea) {
+            textarea.value += text;
+            textarea.focus(); // Focus the input field after appending text
+
+            // Trigger input event to resize textarea
+            const event = new Event('input', { bubbles: true });
+            textarea.dispatchEvent(event);
+        } else {
+            log('Input field not found.');
+        }
+    }
+
+    async function addComments() {
+        const prompt = 'Please add comments to the code:\n\n';
+        await appendText(prompt);
+    }
+
+    async function addDocstring() {
+        const prompt = 'Please add a docstring to the code:\n\n';
+        await appendText(prompt);
+    }
+
+    async function consolidateContent() {
+        const prompt = 'Please organize, optimize, consolidate, and deduplicate the content:\n\n';
+        await appendText(prompt);
+    }
+
+    async function continueResponding() {
+        const prompt = 'Please continue the response.';
+        await appendText(prompt);
+    }
+
+    async function createClassObject() {
+        const prompt = 'Please create a class/object:\n\n';
+        await appendText(prompt);
+    }
+
+    async function createDesktopApp() {
+        const prompt = 'Please create a desktop application:\n\n';
+        await appendText(prompt);
+    }
+
+    async function createFunctionMethod() {
+        const prompt = 'Please create a function/method:\n\n';
+        await appendText(prompt);
+    }
+
+    async function createMobileApp() {
+        const prompt = 'Please create a mobile application:\n\n';
+        await appendText(prompt);
+    }
+
+    async function createScript() {
+        const prompt = 'Please create a script:\n\n';
+        await appendText(prompt);
+    }
+
+    async function createWebApp() {
+        const prompt = 'Please create a web application:\n\n';
+        await appendText(prompt);
+    }
+
+    async function ensureBestPractices() {
+        const prompt = `## Best Practices\n\nPlease ensure that your response adheres to best practices and recommendations regarding architectural principles, design patterns, and programming principles. Specifically, consider the following aspects:
+    
+        - Architectural Principles: Ensure modularity, scalability, and maintainability. Recommend suitable architectural patterns (e.g., microservices, MVC, layered architecture) and explain why they are appropriate.
+        - Design Patterns: Suggest relevant design patterns (e.g., Singleton, Factory, Observer) and describe how they improve the design.
+        - Programming Principles: Follow SOLID principles, DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), and YAGNI (You Aren't Gonna Need It). Include code examples that demonstrate these principles in action.
+        - Code Quality and Testing: Emphasize the importance of code readability, proper documentation, and comprehensive testing (unit tests, integration tests).\n\n`;
+        await appendText(prompt);
+    }
+
+    async function explainConcept() {
+        const prompt = 'Please explain the concept:\n\n';
+        await appendText(prompt);
+    }
+
+    async function explainInteraction() {
+        const prompt = 'Please explain the interaction:\n\n';
+        await appendText(prompt);
+    }
+
+    async function explainRelationship() {
+        const prompt = 'Please explain the relationship:\n\n';
+        await appendText(prompt);
+    }
+
+    async function identifyCodeSmells() {
+        const prompt = 'Please identify code smells:\n\n';
+        await appendText(prompt);
+    }
+
+    async function listAdjectives() {
+        const prompt = 'Please generate a list of adjectives (properties):\n\n';
+        await appendText(prompt);
+    }
+
+    async function listNouns() {
+        const prompt = 'Please generate a list of nouns (objects):\n\n';
+        await appendText(prompt);
+    }
+
+    async function listVerbs() {
+        const prompt = 'Please generate a list of verbs (actions):\n\n';
+        await appendText(prompt);
+    }
+
+    async function modularizeClasses() {
+        const prompt = 'Please modularize the classes:\n\n';
+        await appendText(prompt);
+    }
+
+    async function modularizeFiles() {
+        const prompt = 'Please modularize the files:\n\n';
+        await appendText(prompt);
+    }
+
+    async function modularizeFunctions() {
+        const prompt = 'Please modularize the functions:\n\n';
+        await appendText(prompt);
+    }
+
+    async function optimizePerformance() {
+        const prompt = 'Please optimize the performance:\n\n';
+        await appendText(prompt);
+    }
+
+    async function optimizeReadability() {
+        const prompt = 'Please optimize the readability:\n\n';
+        await appendText(prompt);
+    }
+
+    async function organizeAlphabetically() {
+        const prompt = 'Please organize the following alphabetically:\n\n';
+        await appendText(prompt);
+    }
+
+
+    async function removeComments() {
+        const prompt = 'Please remove comments from the code:\n\n';
+        await appendText(prompt);
+    }
+
+    async function removeRedundancy() {
+        const prompt = 'Please remove redundancy from the content:\n\n';
+        await appendText(prompt);
+    }
+
+    async function translateToHumanLanguage() {
+        const prompt = 'Please translate the content to human-readable language:\n\n';
+        await appendText(prompt);
+    }
+
+    async function translateToProgrammingLanguage() {
+        const prompt = 'Please translate the content to the specified programming language:\n\n';
+        await appendText(prompt);
+    }
+
 
     function createQuestionFromTemplate(copiedText, templateName) {
         const template = templates[templateName];
@@ -515,132 +688,6 @@
             log('File header modal submitted.');
             modal.remove();
         });
-    }
-
-    // Define functions for each leaf node in the function map
-    async function continueResponding() {
-        await appendText('Please continue the response.');
-    }
-
-    async function addComments() {
-        await appendText('Please add comments to the code:\n\n');
-    }
-
-    async function addDocstring() {
-        await appendText('Please add a docstring to the code:\n\n');
-    }
-
-    async function consolidateContent() {
-        await appendText('Please organize, optimize, consolidate, and deduplicate the content:\n\n');
-    }
-
-    async function createDesktopApp() {
-        await appendText('Please create a desktop application:\n\n');
-    }
-
-    async function createMobileApp() {
-        await appendText('Please create a mobile application:\n\n');
-    }
-
-    async function createWebApp() {
-        await appendText('Please create a web application:\n\n');
-    }
-
-    async function createClassObject() {
-        await appendText('Please create a class/object:\n\n');
-    }
-
-    async function createFunctionMethod() {
-        await appendText('Please create a function/method:\n\n');
-    }
-
-    async function createScript() {
-        await appendText('Please create a script:\n\n');
-    }
-
-    async function ensureBestPractices() {
-        const prompt = `## Best Practices\n\nPlease ensure that your response adheres to best practices and recommendations regarding architectural principles, design patterns, and programming principles. Specifically, consider the following aspects:
-
-        - Architectural Principles: Ensure modularity, scalability, and maintainability. Recommend suitable architectural patterns (e.g., microservices, MVC, layered architecture) and explain why they are appropriate.
-        - Design Patterns: Suggest relevant design patterns (e.g., Singleton, Factory, Observer) and describe how they improve the design.
-        - Programming Principles: Follow SOLID principles, DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), and YAGNI (You Aren't Gonna Need It). Include code examples that demonstrate these principles in action.
-        - Code Quality and Testing: Emphasize the importance of code readability, proper documentation, and comprehensive testing (unit tests, integration tests).\n\n`;
-        await appendText(prompt)
-    }
-
-    async function modularizeClasses() {
-        await appendText('Please modularize the classes:\n\n');
-    }
-
-    async function modularizeFunctions() {
-        await appendText('Please modularize the functions:\n\n');
-    }
-
-    async function modularizeFiles() {
-        await appendText('Please modularize the files:\n\n');
-    }
-
-    async function removeComments() {
-        await appendText('Please remove comments from the code:\n\n');
-    }
-
-    async function removeRedundancy() {
-        await appendText('Please remove redundancy from the content:\n\n');
-    }
-
-    async function optimizePerformance() {
-        await appendText('Please optimize the performance:\n\n');
-    }
-
-    async function optimizeReadability() {
-        await appendText('Please optimize the readability:\n\n');
-    }
-
-    async function translateToHumanLanguage() {
-        await appendText('Please translate the content to human-readable language:\n\n');
-    }
-
-    async function translateToProgrammingLanguage() {
-        await appendText('Please translate the content to the specified programming language:\n\n');
-    }
-
-    async function explainConcept() {
-        await appendText('Please explain the concept:\n\n');
-    }
-
-    async function explainInteraction() {
-        await appendText('Please explain the interaction:\n\n');
-    }
-
-    async function explainRelationship() {
-        await appendText('Please explain the relationship:\n\n');
-    }
-
-    async function listVerbs() {
-        await appendText('Please generate a list of verbs (actions):\n\n');
-    }
-
-    async function listNouns() {
-        await appendText('Please generate a list of nouns (objects):\n\n');
-    }
-
-    async function listAdjectives() {
-        await appendText('Please generate a list of adjectives (properties):\n\n');
-    }
-
-    async function appendText(text) {
-        log(`Appending text: ${text}`);
-        const textarea = chatgpt.getChatBox();
-        if (textarea) {
-            textarea.value += text;
-            textarea.focus(); // Focus the input field after appending text
-
-            // Trigger input event to resize textarea
-            const event = new Event('input', { bubbles: true });
-            textarea.dispatchEvent(event);
-        } else {
-            log('Input field not found.');
-        }
     }
 
     // Initialize the script
