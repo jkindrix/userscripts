@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.27
+// @version      2.0.28
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
