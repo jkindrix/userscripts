@@ -80,7 +80,8 @@
             "Verbs (Actions)": "listVerbs",
             "Nouns (Objects)": "listNouns",
             "Adjectives (Properties)": "listAdjectives"
-        }
+        },
+        "Use Best Practices": "ensureBestPractices"
     };
 
     const functionMap = {
@@ -95,6 +96,7 @@
         "createClassObject": createClassObject,
         "createFunctionMethod": createFunctionMethod,
         "createScript": createScript,
+        "ensureBestPractices": ensureBestPractices,
         "modularizeClasses": modularizeClasses,
         "modularizeFunctions": modularizeFunctions,
         "modularizeFiles": modularizeFiles,
@@ -554,6 +556,16 @@
 
     async function createScript() {
         await appendText('Please create a script:\n\n');
+    }
+
+    async function ensureBestPractices() {
+        const prompt = `Please ensure that your response adheres to best practices and recommendations regarding architectural principles, design patterns, and programming principles. Specifically, consider the following aspects:
+
+        - Architectural Principles: Ensure modularity, scalability, and maintainability. Recommend suitable architectural patterns (e.g., microservices, MVC, layered architecture) and explain why they are appropriate.
+        - Design Patterns: Suggest relevant design patterns (e.g., Singleton, Factory, Observer) and describe how they improve the design.
+        - Programming Principles: Follow SOLID principles, DRY (Don't Repeat Yourself), KISS (Keep It Simple, Stupid), and YAGNI (You Aren't Gonna Need It). Include code examples that demonstrate these principles in action.
+        - Code Quality and Testing: Emphasize the importance of code readability, proper documentation, and comprehensive testing (unit tests, integration tests).`;
+        await appendText(prompt)
     }
 
     async function modularizeClasses() {
