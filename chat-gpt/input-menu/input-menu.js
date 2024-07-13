@@ -29,185 +29,185 @@
   await chatgpt.isLoaded();
 
   const menuConfig = {
-    "Behavior": {
-      "Continue": "continueResponding",
-      "Use Best Practices": "ensureBestPractices",
-      "Toggle Formal": "toggleFormal",
-      "Toggle Concise": "toggleConcise"
+    'Behavior': {
+      'Continue': 'continueResponding',
+      'Use Best Practices': 'ensureBestPractices',
+      'Toggle Formal': 'toggleFormal',
+      'Toggle Concise': 'toggleConcise'
     },
-    "Code": {
-      "Add": {
-        "File Header": "openFileHeaderModal",
-        "Comments": "addComments",
-        "Docstring": "addDocstring",
-        "Test Cases": "addTestCases"
+    'Code': {
+      'Add': {
+        'File Header': 'openFileHeaderModal',
+        'Comments': 'addComments',
+        'Docstring': 'addDocstring',
+        'Test Cases': 'addTestCases'
       },
-      "Analyze": {
-        "Identify Code Smells": "identifyCodeSmells",
-        "Security Vulnerabilities": "analyzeSecurityVulnerabilities"
+      'Analyze': {
+        'Identify Code Smells': 'identifyCodeSmells',
+        'Security Vulnerabilities': 'analyzeSecurityVulnerabilities'
       },
-      "Create": {
-        "Application": {
-          "Desktop": "createDesktopApp",
-          "Mobile": "createMobileApp",
-          "Web": "createWebApp"
+      'Create': {
+        'Application': {
+          'Desktop': 'createDesktopApp',
+          'Mobile': 'createMobileApp',
+          'Web': 'createWebApp'
         },
-        "Class/Object": "createClassObject",
-        "Function/Method": "createFunctionMethod",
-        "Script": "createScript",
-        "Unit Test": "createUnitTest",
-        "Integration Test": "createIntegrationTest"
+        'Class/Object': 'createClassObject',
+        'Function/Method': 'createFunctionMethod',
+        'Script': 'createScript',
+        'Unit Test': 'createUnitTest',
+        'Integration Test': 'createIntegrationTest'
       },
-      "Refactor": {
-        "Modularize": {
-          "Classes": "modularizeClasses",
-          "Functions": "modularizeFunctions",
-          "Files": "modularizeFiles"
+      'Refactor': {
+        'Modularize': {
+          'Classes': 'modularizeClasses',
+          'Functions': 'modularizeFunctions',
+          'Files': 'modularizeFiles'
         },
-        "Organize": {
-          "Alphabetically": "organizeAlphabetically",
-          "Consolidate": "consolidateContent"
+        'Organize': {
+          'Alphabetically': 'organizeAlphabetically',
+          'Consolidate': 'consolidateContent'
         },
-        "Remove": {
-          "Comments": "removeComments",
-          "Redundancy": "removeRedundancy"
+        'Remove': {
+          'Comments': 'removeComments',
+          'Redundancy': 'removeRedundancy'
         },
-        "Optimize": {
-          "Performance": "optimizePerformance",
-          "Readability": "optimizeReadability"
+        'Optimize': {
+          'Performance': 'optimizePerformance',
+          'Readability': 'optimizeReadability'
         },
-        "Translate": {
-          "Language": {
-            "Human": "translateToHumanLanguage",
-            "Programming": "translateToProgrammingLanguage"
+        'Translate': {
+          'Language': {
+            'Human': 'translateToHumanLanguage',
+            'Programming': 'translateToProgrammingLanguage'
           }
         }
       },
-      "Update": {
-        "Copy Example": "copyExample",
-        "Version Control": {
-          "Commit": "versionControlCommit",
-          "Branch": "versionControlBranch",
-          "Merge": "versionControlMerge"
+      'Update': {
+        'Copy Example': 'copyExample',
+        'Version Control': {
+          'Commit': 'versionControlCommit',
+          'Branch': 'versionControlBranch',
+          'Merge': 'versionControlMerge'
         }
       },
-      "Debug": {
-        "Find Bugs": "findBugs",
-        "Fix Bugs": "fixBugs",
-        "Log Output": "logOutput"
+      'Debug': {
+        'Find Bugs': 'findBugs',
+        'Fix Bugs': 'fixBugs',
+        'Log Output': 'logOutput'
       }
     },
-    "Explain": {
-      "Concept": "explainConcept",
-      "Interaction": "explainInteraction",
-      "Relationship": "explainRelationship",
-      "Summarize": "summarize",
-      "Walkthrough": "explainWalkthrough",
-      "Beginner Level": "explainBeginnerLevel",
-      "Intermediate Level": "explainIntermediateLevel",
-      "Advanced Level": "explainAdvancedLevel"
+    'Explain': {
+      'Concept': 'explainConcept',
+      'Interaction': 'explainInteraction',
+      'Relationship': 'explainRelationship',
+      'Summarize': 'summarize',
+      'Walkthrough': 'explainWalkthrough',
+      'Beginner Level': 'explainBeginnerLevel',
+      'Intermediate Level': 'explainIntermediateLevel',
+      'Advanced Level': 'explainAdvancedLevel'
     },
-    "List": {
-      "Verbs (Actions)": "listVerbs",
-      "Nouns (Objects)": "listNouns",
-      "Adjectives (Properties)": "listAdjectives",
-      "Libraries/Frameworks": "listLibrariesFrameworks",
-      "Design Patterns": "listDesignPatterns"
+    'List': {
+      'Verbs (Actions)': 'listVerbs',
+      'Nouns (Objects)': 'listNouns',
+      'Adjectives (Properties)': 'listAdjectives',
+      'Libraries/Frameworks': 'listLibrariesFrameworks',
+      'Design Patterns': 'listDesignPatterns'
     },
-    "Prompt Engineering": {
-      "Expert Prompt Creator": "expertPromptCreator",
-      "Enhance Prompt": "enhancePrompt",
-      "Prompt for Prompts": "promptForPrompts",
-      "Generate Variations": "generatePromptVariations",
-      "Evaluate Effectiveness": "evaluatePromptEffectiveness"
+    'Prompt Engineering': {
+      'Expert Prompt Creator': 'expertPromptCreator',
+      'Enhance Prompt': 'enhancePrompt',
+      'Prompt for Prompts': 'promptForPrompts',
+      'Generate Variations': 'generatePromptVariations',
+      'Evaluate Effectiveness': 'evaluatePromptEffectiveness'
     },
-    "Roles": {
-      "UX/UI Developer": "actAsUxUiDeveloper",
-      "Fullstack Software Developer": "actAsFullstackSoftwareDeveloper",
-      "Senior Frontend Developer": "actAsSeniorFrontendDeveloper",
-      "Machine Learning Engineer": "actAsMachineLearningEngineer",
-      "Software QA Tester": "actAsSoftwareQaTester",
-      "Tech Writer": "actAsTechWriter",
-      "StoryBot": "actAsStoryBot",
-      "Teacher": "actAsTeacher",
-      "Data Scientist": "actAsDataScientist",
-      "DevOps Engineer": "actAsDevOpsEngineer",
-      "Product Manager": "actAsProductManager"
+    'Roles': {
+      'UX/UI Developer': 'actAsUxUiDeveloper',
+      'Fullstack Software Developer': 'actAsFullstackSoftwareDeveloper',
+      'Senior Frontend Developer': 'actAsSeniorFrontendDeveloper',
+      'Machine Learning Engineer': 'actAsMachineLearningEngineer',
+      'Software QA Tester': 'actAsSoftwareQaTester',
+      'Tech Writer': 'actAsTechWriter',
+      'StoryBot': 'actAsStoryBot',
+      'Teacher': 'actAsTeacher',
+      'Data Scientist': 'actAsDataScientist',
+      'DevOps Engineer': 'actAsDevOpsEngineer',
+      'Product Manager': 'actAsProductManager'
     }
   };
 
   const functionMap = {
-    "continueResponding": continueResponding,
-    "ensureBestPractices": ensureBestPractices,
-    "toggleFormal": toggleFormal,
-    "toggleConcise": toggleConcise,
-    "openFileHeaderModal": openFileHeaderModal,
-    "addComments": addComments,
-    "addDocstring": addDocstring,
-    "addTestCases": addTestCases,
-    "identifyCodeSmells": identifyCodeSmells,
-    "analyzeSecurityVulnerabilities": analyzeSecurityVulnerabilities,
-    "createDesktopApp": createDesktopApp,
-    "createMobileApp": createMobileApp,
-    "createWebApp": createWebApp,
-    "createClassObject": createClassObject,
-    "createFunctionMethod": createFunctionMethod,
-    "createScript": createScript,
-    "createUnitTest": createUnitTest,
-    "createIntegrationTest": createIntegrationTest,
-    "modularizeClasses": modularizeClasses,
-    "modularizeFunctions": modularizeFunctions,
-    "modularizeFiles": modularizeFiles,
-    "organizeAlphabetically": organizeAlphabetically,
-    "consolidateContent": consolidateContent,
-    "removeComments": removeComments,
-    "removeRedundancy": removeRedundancy,
-    "optimizePerformance": optimizePerformance,
-    "optimizeReadability": optimizeReadability,
-    "translateToHumanLanguage": translateToHumanLanguage,
-    "translateToProgrammingLanguage": translateToProgrammingLanguage,
-    "copyExample": copyExample,
-    "versionControlCommit": versionControlCommit,
-    "versionControlBranch": versionControlBranch,
-    "versionControlMerge": versionControlMerge,
-    "findBugs": findBugs,
-    "fixBugs": fixBugs,
-    "logOutput": logOutput,
-    "explainConcept": explainConcept,
-    "explainInteraction": explainInteraction,
-    "explainRelationship": explainRelationship,
-    "summarize": summarize,
-    "explainWalkthrough": explainWalkthrough,
-    "explainBeginnerLevel": explainBeginnerLevel,
-    "explainIntermediateLevel": explainIntermediateLevel,
-    "explainAdvancedLevel": explainAdvancedLevel,
-    "listVerbs": listVerbs,
-    "listNouns": listNouns,
-    "listAdjectives": listAdjectives,
-    "listLibrariesFrameworks": listLibrariesFrameworks,
-    "listDesignPatterns": listDesignPatterns,
-    "expertPromptCreator": expertPromptCreator,
-    "enhancePrompt": enhancePrompt,
-    "promptForPrompts": promptForPrompts,
-    "generatePromptVariations": generatePromptVariations,
-    "evaluatePromptEffectiveness": evaluatePromptEffectiveness,
-    "actAsUxUiDeveloper": actAsUxUiDeveloper,
-    "actAsFullstackSoftwareDeveloper": actAsFullstackSoftwareDeveloper,
-    "actAsSeniorFrontendDeveloper": actAsSeniorFrontendDeveloper,
-    "actAsMachineLearningEngineer": actAsMachineLearningEngineer,
-    "actAsSoftwareQaTester": actAsSoftwareQaTester,
-    "actAsTechWriter": actAsTechWriter,
-    "actAsStoryBot": actAsStoryBot,
-    "actAsTeacher": actAsTeacher,
-    "actAsDataScientist": actAsDataScientist,
-    "actAsDevOpsEngineer": actAsDevOpsEngineer,
-    "actAsProductManager": actAsProductManager
+    'continueResponding': continueResponding,
+    'ensureBestPractices': ensureBestPractices,
+    'toggleFormal': toggleFormal,
+    'toggleConcise': toggleConcise,
+    'openFileHeaderModal': openFileHeaderModal,
+    'addComments': addComments,
+    'addDocstring': addDocstring,
+    'addTestCases': addTestCases,
+    'identifyCodeSmells': identifyCodeSmells,
+    'analyzeSecurityVulnerabilities': analyzeSecurityVulnerabilities,
+    'createDesktopApp': createDesktopApp,
+    'createMobileApp': createMobileApp,
+    'createWebApp': createWebApp,
+    'createClassObject': createClassObject,
+    'createFunctionMethod': createFunctionMethod,
+    'createScript': createScript,
+    'createUnitTest': createUnitTest,
+    'createIntegrationTest': createIntegrationTest,
+    'modularizeClasses': modularizeClasses,
+    'modularizeFunctions': modularizeFunctions,
+    'modularizeFiles': modularizeFiles,
+    'organizeAlphabetically': organizeAlphabetically,
+    'consolidateContent': consolidateContent,
+    'removeComments': removeComments,
+    'removeRedundancy': removeRedundancy,
+    'optimizePerformance': optimizePerformance,
+    'optimizeReadability': optimizeReadability,
+    'translateToHumanLanguage': translateToHumanLanguage,
+    'translateToProgrammingLanguage': translateToProgrammingLanguage,
+    'copyExample': copyExample,
+    'versionControlCommit': versionControlCommit,
+    'versionControlBranch': versionControlBranch,
+    'versionControlMerge': versionControlMerge,
+    'findBugs': findBugs,
+    'fixBugs': fixBugs,
+    'logOutput': logOutput,
+    'explainConcept': explainConcept,
+    'explainInteraction': explainInteraction,
+    'explainRelationship': explainRelationship,
+    'summarize': summarize,
+    'explainWalkthrough': explainWalkthrough,
+    'explainBeginnerLevel': explainBeginnerLevel,
+    'explainIntermediateLevel': explainIntermediateLevel,
+    'explainAdvancedLevel': explainAdvancedLevel,
+    'listVerbs': listVerbs,
+    'listNouns': listNouns,
+    'listAdjectives': listAdjectives,
+    'listLibrariesFrameworks': listLibrariesFrameworks,
+    'listDesignPatterns': listDesignPatterns,
+    'expertPromptCreator': expertPromptCreator,
+    'enhancePrompt': enhancePrompt,
+    'promptForPrompts': promptForPrompts,
+    'generatePromptVariations': generatePromptVariations,
+    'evaluatePromptEffectiveness': evaluatePromptEffectiveness,
+    'actAsUxUiDeveloper': actAsUxUiDeveloper,
+    'actAsFullstackSoftwareDeveloper': actAsFullstackSoftwareDeveloper,
+    'actAsSeniorFrontendDeveloper': actAsSeniorFrontendDeveloper,
+    'actAsMachineLearningEngineer': actAsMachineLearningEngineer,
+    'actAsSoftwareQaTester': actAsSoftwareQaTester,
+    'actAsTechWriter': actAsTechWriter,
+    'actAsStoryBot': actAsStoryBot,
+    'actAsTeacher': actAsTeacher,
+    'actAsDataScientist': actAsDataScientist,
+    'actAsDevOpsEngineer': actAsDevOpsEngineer,
+    'actAsProductManager': actAsProductManager
   };
 
   const templates = {
-    "What is this?": '- What is this?: "$placeholder"\n',
-    "What did you mean?": '- What did you mean by this?: "$placeholder"\n',
-    "Can you give some examples?": '- Can you give me some examples of this?: "$placeholder"\n'
+    'What is this?': '- What is this?: "$placeholder"\n',
+    'What did you mean?': '- What did you mean by this?: "$placeholder"\n',
+    'Can you give some examples?': '- Can you give me some examples of this?: "$placeholder"\n'
   };
 
   // Define functions for each leaf node in the function map
@@ -278,7 +278,7 @@
   }
 
   async function ensureBestPractices() {
-    const prompt = `## Best Practices\n\nPlease ensure that your response adheres to best practices and recommendations regarding architectural principles, design patterns, and programming principles.\n\n`;
+    const prompt = '## Best Practices\n\nPlease ensure that your response adheres to best practices and recommendations regarding architectural principles, design patterns, and programming principles.\n\n';
     await appendText(prompt);
   }
 
@@ -308,9 +308,9 @@ Remember, the prompt we are creating should be written from the perspective of M
 
 Think carefully and use your imagination to create an amazing prompt for me.
 
-Your first response should only be a greeting and to ask what the prompt should be about.\n\n`
+Your first response should only be a greeting and to ask what the prompt should be about.\n\n`;
 
-    await appendText(prompt)
+    await appendText(prompt);
   }
 
   async function enhancePrompt() {
@@ -325,7 +325,7 @@ Your first response should only be a greeting and to ask what the prompt should 
 
 Remember to ensure the revised prompt remains true to the user's original intent.
 
-Initial User Prompt:\n\n`
+Initial User Prompt:\n\n`;
     await appendText(prompt);
   }
 
@@ -339,7 +339,7 @@ need to improve it through continual iterations by going through the next steps.
 be clear, concise, and easily understood by you), b) Questions (ask any relevant questions pertaining to what
 additional information is needed from me to improve the prompt).
 3. We will continue this iterative process with me providing additional information to you and you updating
-the prompt in the Revised prompt section until I say we are done.\n\n`
+the prompt in the Revised prompt section until I say we are done.\n\n`;
     await appendText(prompt);
   }
 
@@ -359,7 +359,7 @@ the prompt in the Revised prompt section until I say we are done.\n\n`
   }
 
   async function summarize() {
-    const prompt = `What is a concise, one-paragraph summary of the key concepts, context, and implications of:\n\n`
+    const prompt = 'What is a concise, one-paragraph summary of the key concepts, context, and implications of:\n\n';
     await appendText(prompt);
   }
   async function explainWalkthrough() {
@@ -439,164 +439,164 @@ the prompt in the Revised prompt section until I say we are done.\n\n`
   }
 
   async function actAsUxUiDeveloper() {
-    const prompt = `I want you to act as a UX/UI developer. I will provide some details about the design of an app, website or other digital product, and it will be your job to come up with creative ways to improve its user experience. This could involve creating prototyping prototypes, testing different designs and providing feedback on what works best. My first request is "I need help designing an intuitive navigation system for my new mobile application."\n\n`;
+    const prompt = 'I want you to act as a UX/UI developer. I will provide some details about the design of an app, website or other digital product, and it will be your job to come up with creative ways to improve its user experience. This could involve creating prototyping prototypes, testing different designs and providing feedback on what works best. My first request is "I need help designing an intuitive navigation system for my new mobile application."\n\n';
     await appendText(prompt);
   }
 
   async function actAsFullstackSoftwareDeveloper() {
-    const prompt = `I want you to act as a software developer. I will provide some specific information about a web app requirements, and it will be your job to come up with an architecture and code for developing secure app with Golang and Angular. My first request is 'I want a system that allow users to register and save their vehicle information according to their roles and there will be admin, user and company roles. I want the system to use JWT for security'.\n\n`;
+    const prompt = 'I want you to act as a software developer. I will provide some specific information about a web app requirements, and it will be your job to come up with an architecture and code for developing secure app with Golang and Angular. My first request is \'I want a system that allow users to register and save their vehicle information according to their roles and there will be admin, user and company roles. I want the system to use JWT for security\'.\n\n';
     await appendText(prompt);
   }
 
   async function actAsSeniorFrontendDeveloper() {
-    const prompt = `I want you to act as a Senior Frontend developer. I will describe a project details you will code project with this tools: Create React App, yarn, Ant Design, List, Redux Toolkit, createSlice, thunk, axios. You should merge files in single index.js file and nothing else. Do not write explanations. My first request is "Create Pokemon App that lists pokemons with images that come from PokeAPI sprites endpoint".\n\n`;
+    const prompt = 'I want you to act as a Senior Frontend developer. I will describe a project details you will code project with this tools: Create React App, yarn, Ant Design, List, Redux Toolkit, createSlice, thunk, axios. You should merge files in single index.js file and nothing else. Do not write explanations. My first request is "Create Pokemon App that lists pokemons with images that come from PokeAPI sprites endpoint".\n\n';
     await appendText(prompt);
   }
 
   async function actAsMachineLearningEngineer() {
-    const prompt = `I want you to act as a machine learning engineer. I will write some machine learning concepts and it will be your job to explain them in easy-to-understand terms. This could contain providing step-by-step instructions for building a model, demonstrating various techniques with visuals, or suggesting online resources for further study. My first suggestion request is "I have a dataset without labels. Which machine learning algorithm should I use?"\n\n`;
+    const prompt = 'I want you to act as a machine learning engineer. I will write some machine learning concepts and it will be your job to explain them in easy-to-understand terms. This could contain providing step-by-step instructions for building a model, demonstrating various techniques with visuals, or suggesting online resources for further study. My first suggestion request is "I have a dataset without labels. Which machine learning algorithm should I use?"\n\n';
     await appendText(prompt);
   }
 
   async function actAsSoftwareQaTester() {
-    const prompt = `I want you to act as a software quality assurance tester for a new software application. Your job is to test the functionality and performance of the software to ensure it meets the required standards. You will need to write detailed reports on any issues or bugs you encounter, and provide recommendations for improvement. Do not include any personal opinions or subjective evaluations in your reports. Your first task is to test the login functionality of the software.\n\n`;
+    const prompt = 'I want you to act as a software quality assurance tester for a new software application. Your job is to test the functionality and performance of the software to ensure it meets the required standards. You will need to write detailed reports on any issues or bugs you encounter, and provide recommendations for improvement. Do not include any personal opinions or subjective evaluations in your reports. Your first task is to test the login functionality of the software.\n\n';
     await appendText(prompt);
   }
 
   async function actAsTechWriter() {
-    const prompt = `Act as a tech writer. You will act as a creative and engaging technical writer and create guides on how to do different stuff on specific software. I will provide you with basic steps of an app functionality and you will come up with an engaging article on how to do those basic steps. You can ask for screenshots, just add (screenshot) to where you think there should be one and I will add those later. These are the first basic steps of the app functionality: "1.Click on the download button depending on your platform 2.Install the file. 3.Double click to open the app".\n\n`;
+    const prompt = 'Act as a tech writer. You will act as a creative and engaging technical writer and create guides on how to do different stuff on specific software. I will provide you with basic steps of an app functionality and you will come up with an engaging article on how to do those basic steps. You can ask for screenshots, just add (screenshot) to where you think there should be one and I will add those later. These are the first basic steps of the app functionality: "1.Click on the download button depending on your platform 2.Install the file. 3.Double click to open the app".\n\n';
     await appendText(prompt);
   }
 
   async function actAsStoryBot() {
-    const prompt = `Act as StoryBot. Storybot explains everything in form of a story, even the most complex topics.\n\n`;
+    const prompt = 'Act as StoryBot. Storybot explains everything in form of a story, even the most complex topics.\n\n';
     await appendText(prompt);
   }
 
   async function actAsTeacher() {
-    const prompt = `You are an elite ______. And I am your student whom you must pass on your knowledge and expertise. In a series of sessions, you have to fulfil this duty and see that I have mastered ________ by giving me tests that I would encounter in the real world.\n\n`;
+    const prompt = 'You are an elite ______. And I am your student whom you must pass on your knowledge and expertise. In a series of sessions, you have to fulfil this duty and see that I have mastered ________ by giving me tests that I would encounter in the real world.\n\n';
     await appendText(prompt);
   }
 
   async function copyExample() {
-    const prompt = `## Copy Example\n\nPlease provide an example of how to use the following code or concept. Ensure that the example is clear, well-commented, and easy to understand.\n\n`;
+    const prompt = '## Copy Example\n\nPlease provide an example of how to use the following code or concept. Ensure that the example is clear, well-commented, and easy to understand.\n\n';
     await appendText(prompt);
   }
 
   async function toggleFormal() {
-    const prompt = `## Toggle Formal\n\nPlease adjust your response style to be more formal or informal based on the context and request.\n\n`;
+    const prompt = '## Toggle Formal\n\nPlease adjust your response style to be more formal or informal based on the context and request.\n\n';
     await appendText(prompt);
   }
 
   async function toggleConcise() {
-    const prompt = `## Toggle Concise\n\nPlease adjust your response to be more concise or detailed based on the context and request.\n\n`;
+    const prompt = '## Toggle Concise\n\nPlease adjust your response to be more concise or detailed based on the context and request.\n\n';
     await appendText(prompt);
   }
 
   async function addTestCases() {
-    const prompt = `## Add Test Cases\n\nPlease add relevant test cases for the provided code to ensure its functionality and correctness.\n\n`;
+    const prompt = '## Add Test Cases\n\nPlease add relevant test cases for the provided code to ensure its functionality and correctness.\n\n';
     await appendText(prompt);
   }
 
   async function analyzeSecurityVulnerabilities() {
-    const prompt = `## Analyze Security Vulnerabilities\n\nPlease analyze the provided code for any potential security vulnerabilities and suggest improvements to mitigate them.\n\n`;
+    const prompt = '## Analyze Security Vulnerabilities\n\nPlease analyze the provided code for any potential security vulnerabilities and suggest improvements to mitigate them.\n\n';
     await appendText(prompt);
   }
 
   async function createUnitTest() {
-    const prompt = `## Create Unit Test\n\nPlease create unit tests for the specified functions or methods to verify their correctness.\n\n`;
+    const prompt = '## Create Unit Test\n\nPlease create unit tests for the specified functions or methods to verify their correctness.\n\n';
     await appendText(prompt);
   }
 
   async function createIntegrationTest() {
-    const prompt = `## Create Integration Test\n\nPlease create integration tests to verify that different parts of the application work together correctly.\n\n`;
+    const prompt = '## Create Integration Test\n\nPlease create integration tests to verify that different parts of the application work together correctly.\n\n';
     await appendText(prompt);
   }
 
   async function versionControlCommit() {
-    const prompt = `## Version Control Commit\n\nPlease prepare a commit message for the following changes:\n\n`;
+    const prompt = '## Version Control Commit\n\nPlease prepare a commit message for the following changes:\n\n';
     await appendText(prompt);
   }
 
   async function versionControlBranch() {
-    const prompt = `## Version Control Branch\n\nPlease create a new branch in version control for the following feature or issue:\n\n`;
+    const prompt = '## Version Control Branch\n\nPlease create a new branch in version control for the following feature or issue:\n\n';
     await appendText(prompt);
   }
 
   async function versionControlMerge() {
-    const prompt = `## Version Control Merge\n\nPlease merge the specified branch into the main branch and resolve any conflicts that arise.\n\n`;
+    const prompt = '## Version Control Merge\n\nPlease merge the specified branch into the main branch and resolve any conflicts that arise.\n\n';
     await appendText(prompt);
   }
 
   async function findBugs() {
-    const prompt = `## Find Bugs\n\nPlease analyze the provided code for any bugs and report them with possible solutions.\n\n`;
+    const prompt = '## Find Bugs\n\nPlease analyze the provided code for any bugs and report them with possible solutions.\n\n';
     await appendText(prompt);
   }
 
   async function fixBugs() {
-    const prompt = `## Fix Bugs\n\nPlease fix the identified bugs in the provided code and ensure it works as expected.\n\n`;
+    const prompt = '## Fix Bugs\n\nPlease fix the identified bugs in the provided code and ensure it works as expected.\n\n';
     await appendText(prompt);
   }
 
   async function logOutput() {
-    const prompt = `## Log Output\n\nPlease add appropriate logging to the provided code to help with debugging and monitoring.\n\n`;
+    const prompt = '## Log Output\n\nPlease add appropriate logging to the provided code to help with debugging and monitoring.\n\n';
     await appendText(prompt);
   }
 
   async function explainBeginnerLevel() {
-    const prompt = `## Explain (Beginner Level)\n\nPlease explain the following concept in a way that a beginner can understand:\n\n`;
+    const prompt = '## Explain (Beginner Level)\n\nPlease explain the following concept in a way that a beginner can understand:\n\n';
     await appendText(prompt);
   }
 
   async function explainIntermediateLevel() {
-    const prompt = `## Explain (Intermediate Level)\n\nPlease explain the following concept in a way that someone with intermediate knowledge can understand:\n\n`;
+    const prompt = '## Explain (Intermediate Level)\n\nPlease explain the following concept in a way that someone with intermediate knowledge can understand:\n\n';
     await appendText(prompt);
   }
 
   async function explainAdvancedLevel() {
-    const prompt = `## Explain (Advanced Level)\n\nPlease explain the following concept in a way that an expert can understand:\n\n`;
+    const prompt = '## Explain (Advanced Level)\n\nPlease explain the following concept in a way that an expert can understand:\n\n';
     await appendText(prompt);
   }
 
   async function listLibrariesFrameworks() {
-    const prompt = `## List Libraries/Frameworks\n\nPlease list the relevant libraries and frameworks for the following technology or use case:\n\n`;
+    const prompt = '## List Libraries/Frameworks\n\nPlease list the relevant libraries and frameworks for the following technology or use case:\n\n';
     await appendText(prompt);
   }
 
   async function listDesignPatterns() {
-    const prompt = `## List Design Patterns\n\nPlease list the appropriate design patterns for the following programming scenario:\n\n`;
+    const prompt = '## List Design Patterns\n\nPlease list the appropriate design patterns for the following programming scenario:\n\n';
     await appendText(prompt);
   }
 
   async function generatePromptVariations() {
-    const prompt = `## Generate Prompt Variations\n\nPlease generate several variations of the following prompt to explore different ways to ask the question or request:\n\n`;
+    const prompt = '## Generate Prompt Variations\n\nPlease generate several variations of the following prompt to explore different ways to ask the question or request:\n\n';
     await appendText(prompt);
   }
 
   async function evaluatePromptEffectiveness() {
-    const prompt = `## Evaluate Prompt Effectiveness\n\nPlease evaluate the effectiveness of the following prompt and suggest improvements:\n\n`;
+    const prompt = '## Evaluate Prompt Effectiveness\n\nPlease evaluate the effectiveness of the following prompt and suggest improvements:\n\n';
     await appendText(prompt);
   }
 
   async function actAsDataScientist() {
-    const prompt = `## Act as Data Scientist\n\nYou will act as a Data Scientist. Your goal is to provide insights, data analysis, and machine learning solutions. Start by asking what specific data or problem needs to be addressed.\n\n`;
+    const prompt = '## Act as Data Scientist\n\nYou will act as a Data Scientist. Your goal is to provide insights, data analysis, and machine learning solutions. Start by asking what specific data or problem needs to be addressed.\n\n';
     await appendText(prompt);
   }
 
   async function actAsDevOpsEngineer() {
-    const prompt = `## Act as DevOps Engineer\n\nYou will act as a DevOps Engineer. Your goal is to provide solutions for continuous integration, deployment, and infrastructure automation. Start by asking what specific system or deployment needs to be addressed.\n\n`;
+    const prompt = '## Act as DevOps Engineer\n\nYou will act as a DevOps Engineer. Your goal is to provide solutions for continuous integration, deployment, and infrastructure automation. Start by asking what specific system or deployment needs to be addressed.\n\n';
     await appendText(prompt);
   }
 
   async function actAsProductManager() {
-    const prompt = `## Act as Product Manager\n\nYou will act as a Product Manager. Your goal is to provide strategic product planning, user stories, and feature prioritization. Start by asking what specific product or feature needs to be addressed.\n\n`;
+    const prompt = '## Act as Product Manager\n\nYou will act as a Product Manager. Your goal is to provide strategic product planning, user stories, and feature prioritization. Start by asking what specific product or feature needs to be addressed.\n\n';
     await appendText(prompt);
   }
 
   function createQuestionFromTemplate(copiedText, templateName) {
     const template = templates[templateName];
     if (!template) {
-      throw new Error("Template not found");
+      throw new Error('Template not found');
     }
     return template.replace('$placeholder', copiedText);
   }
