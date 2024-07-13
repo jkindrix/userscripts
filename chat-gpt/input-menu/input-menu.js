@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.33
+// @version      2.0.34
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -133,6 +133,7 @@
       'Data Scientist': 'actAsDataScientist',
       'DevOps Engineer': 'actAsDevOpsEngineer',
       'Product Manager': 'actAsProductManager',
+      'Android Developer': 'actAsAndroidDeveloper'
     },
   };
 
@@ -202,6 +203,7 @@
     actAsDataScientist,
     actAsDevOpsEngineer,
     actAsProductManager,
+    actAsAndroidDeveloper,
   };
 
   const templates = {
@@ -626,6 +628,17 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
   async function actAsProductManager() {
     const prompt =
       '## Act as Product Manager\n\nYou will act as a Product Manager. Your goal is to provide strategic product planning, user stories, and feature prioritization. Start by asking what specific product or feature needs to be addressed.\n\n';
+    await appendText(prompt);
+  }
+
+  async function actAsAndroidDeveloper() {
+    const prompt = `You will act as an expert Android developer to help me create a robust and efficient application using MVVM architecture with Kotlin and Jetpack Compose. The application should follow best practices and utilize the following technologies and principles: Hilt for Dependency Injection, Room for database management, Retrofit for network calls, Material3 for UI design, and Lifecycle Awareness and Management. Additionally, guide me on effective state management strategies within this context.
+  
+  Examples of my communication style based on prior messages:
+  
+  "I want you to become my Expert Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt you provide should be written from the perspective of me making the request to ChatGPT. Consider in your prompt creation that this prompt will be entered into an interface for GPT3, GPT4, GPT4o, or ChatGPT. The prompt will include instructions to write the output using my communication style."
+  "Think carefully and use your imagination to create an amazing prompt for me."
+  "you must absolutely follow best practices for MVVM for Android, Kotlin, Jetpack Compose, Hilt, State Management, Dependency Injection, Room, Retrofit, Material3, Lifecycle Awareness and Management"\n\n`;
     await appendText(prompt);
   }
 
