@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.30
+// @version      2.0.31
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -29,7 +29,10 @@
     await chatgpt.isLoaded();
 
     const menuConfig = {
-        "Continue": "continueResponding",
+        "Behavior": {
+            "Continue": "continueResponding",
+            "Use Best Practices": "ensureBestPractices",
+        },
         "Code": {
             "Add": {
                 "File Header": "openFileHeaderModal",
@@ -82,6 +85,7 @@
             "Concept": "explainConcept",
             "Interaction": "explainInteraction",
             "Relationship": "explainRelationship",
+            "Summarize": "summarize",
             "Walkthrough": "explainWalkthrough"
         },
         "List": {
@@ -89,7 +93,21 @@
             "Nouns (Objects)": "listNouns",
             "Adjectives (Properties)": "listAdjectives"
         },
-        "Use Best Practices": "ensureBestPractices"
+        "Prompt Engineering": {
+            "Expert Prompt Creator": "expertPromptCreator",
+            "Enhance Prompt": "enhancePrompt",
+            "Prompt for Prompts": "promptForPrompts"
+        },
+        "Roles": {
+            "UX/UI Developer": "actAsUxUiDeveloper",
+            "Fullstack Software Developer": "actAsFullstackSoftwareDeveloper",
+            "Senior Frontend Developer": "actAsSeniorFrontendDeveloper",
+            "Machine Learning Engineer": "actAsMachineLearningEngineer",
+            "Software QA Tester": "actAsSoftwareQaTester",
+            "Tech Writer": "actAsTechWriter",
+            "StoryBot": "actAsStoryBot",
+            "Teacher": "actAsTeacher"
+        }
     };
 
     const functionMap = {
@@ -120,9 +138,21 @@
         "explainInteraction": explainInteraction,
         "explainRelationship": explainRelationship,
         "explainWalkthrough": explainWalkthrough,
+        "summarize": summarize,
+        "expertPromptCreator": expertPromptCreator,
+        "enhancePrompt": enhancePrompt,
+        "promptForPrompts": promptForPrompts,
         "listVerbs": listVerbs,
         "listNouns": listNouns,
-        "listAdjectives": listAdjectives
+        "listAdjectives": listAdjectives,
+        "actAsUxUiDeveloper": actAsUxUiDeveloper,
+        "actAsFullstackSoftwareDeveloper": actAsFullstackSoftwareDeveloper,
+        "actAsSeniorFrontendDeveloper": actAsSeniorFrontendDeveloper,
+        "actAsMachineLearningEngineer": actAsMachineLearningEngineer,
+        "actAsSoftwareQaTester": actAsSoftwareQaTester,
+        "actAsTechWriter": actAsTechWriter,
+        "actAsStoryBot": actAsStoryBot,
+        "actAsTeacher": actAsTeacher
     };
 
     const templates = {
@@ -203,6 +233,67 @@
         await appendText(prompt);
     }
 
+    async function expertPromptCreator() {
+        const prompt = `I want you to become my Expert Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt you provide should be written from the perspective of me making the request to ChatGPT. Consider in your prompt creation that this prompt will be entered into an interface for GPT3, GPT4, GPT4o, or ChatGPT. The prompt will include instructions to write the output using my communication style. The process is as follows:
+
+1. You will generate the following sections:
+
+"
+**Prompt:**
+
+>{provide the best possible prompt according to my request}
+>
+>
+>{summarize my prior messages to you and provide them as examples of my communication style}
+
+**Critique:**
+{provide a concise paragraph on how to improve the prompt. Be very critical in your response. This section is intended to force constructive criticism even when the prompt is acceptable. Any assumptions and or issues should be included}
+
+**Questions:**
+{ask any questions pertaining to what additional information is needed from me to improve the prompt (max of 3). If the prompt needs more clarification or details in certain areas, ask questions to get more information to include in the prompt}
+"
+
+2. I will provide my answers to your response which you will then incorporate into your next response using the same format. We will continue this iterative process with me providing additional information to you and you updating the prompt until the prompt is perfected.
+
+Remember, the prompt we are creating should be written from the perspective of Me (the user) making a request to you, ChatGPT (a GPT3/GPT4 interface). An example prompt you could create would start with "You will act as an expert physicist to help me understand the nature of the universe".
+
+Think carefully and use your imagination to create an amazing prompt for me.
+
+Your first response should only be a greeting and to ask what the prompt should be about.\n\n`
+
+        await appendText(prompt)
+    }
+
+    async function enhancePrompt() {
+        const prompt = `Given the user's initial prompt below, enhance it.
+
+1. Start with clear, precise instructions placed at the beginning of the prompt.
+2. Include specific details about the desired context, outcome, length, format, and style.
+3. Provide examples of the desired output format, if possible.
+4. Use appropriate leading words or phrases to guide the desired output, especially if code generation is involved.
+5. Avoid any vague or imprecise language.
+6. Rather than only stating what not to do, provide guidance on what should be done instead.
+
+Remember to ensure the revised prompt remains true to the user's original intent.
+
+Initial User Prompt:\n\n`
+        await appendText(prompt);
+    }
+
+    async function promptForPrompts() {
+        const prompt = `I want you to become my Prompt engineer. Your goal is to help me craft the best possible prompt for my needs.
+The prompt will be used by you, ChatGPT. You will follow the following process:
+
+1. Your first response will be to ask me what the prompt should be about. I will provide my answer, but we will
+need to improve it through continual iterations by going through the next steps.
+2. Based on my input, you will generate 2 sections, a) Revised prompt (provide your rewritten prompt, it should
+be clear, concise, and easily understood by you), b) Questions (ask any relevant questions pertaining to what
+additional information is needed from me to improve the prompt).
+3. We will continue this iterative process with me providing additional information to you and you updating
+the prompt in the Revised prompt section until I say we are done.\n\n`
+        await appendText(prompt);
+    }
+
     async function explainConcept() {
         const prompt = 'Please explain the concept:\n\n';
         await appendText(prompt);
@@ -218,6 +309,10 @@
         await appendText(prompt);
     }
 
+    async function summarize() {
+        const prompt = `What is a concise, one-paragraph summary of the key concepts, context, and implications of:\n\n`
+        await appendText(prompt);
+    }
     async function explainWalkthrough() {
         const prompt = 'Please walk me through this:\n\n';
         await appendText(prompt);
@@ -294,6 +389,45 @@
         await appendText(prompt);
     }
 
+    async function actAsUxUiDeveloper() {
+        const prompt = `I want you to act as a UX/UI developer. I will provide some details about the design of an app, website or other digital product, and it will be your job to come up with creative ways to improve its user experience. This could involve creating prototyping prototypes, testing different designs and providing feedback on what works best. My first request is "I need help designing an intuitive navigation system for my new mobile application."\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsFullstackSoftwareDeveloper() {
+        const prompt = `I want you to act as a software developer. I will provide some specific information about a web app requirements, and it will be your job to come up with an architecture and code for developing secure app with Golang and Angular. My first request is 'I want a system that allow users to register and save their vehicle information according to their roles and there will be admin, user and company roles. I want the system to use JWT for security'.\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsSeniorFrontendDeveloper() {
+        const prompt = `I want you to act as a Senior Frontend developer. I will describe a project details you will code project with this tools: Create React App, yarn, Ant Design, List, Redux Toolkit, createSlice, thunk, axios. You should merge files in single index.js file and nothing else. Do not write explanations. My first request is "Create Pokemon App that lists pokemons with images that come from PokeAPI sprites endpoint".\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsMachineLearningEngineer() {
+        const prompt = `I want you to act as a machine learning engineer. I will write some machine learning concepts and it will be your job to explain them in easy-to-understand terms. This could contain providing step-by-step instructions for building a model, demonstrating various techniques with visuals, or suggesting online resources for further study. My first suggestion request is "I have a dataset without labels. Which machine learning algorithm should I use?"\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsSoftwareQaTester() {
+        const prompt = `I want you to act as a software quality assurance tester for a new software application. Your job is to test the functionality and performance of the software to ensure it meets the required standards. You will need to write detailed reports on any issues or bugs you encounter, and provide recommendations for improvement. Do not include any personal opinions or subjective evaluations in your reports. Your first task is to test the login functionality of the software.\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsTechWriter() {
+        const prompt = `Act as a tech writer. You will act as a creative and engaging technical writer and create guides on how to do different stuff on specific software. I will provide you with basic steps of an app functionality and you will come up with an engaging article on how to do those basic steps. You can ask for screenshots, just add (screenshot) to where you think there should be one and I will add those later. These are the first basic steps of the app functionality: "1.Click on the download button depending on your platform 2.Install the file. 3.Double click to open the app".\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsStoryBot() {
+        const prompt = `Act as StoryBot. Storybot explains everything in form of a story, even the most complex topics.\n\n`;
+        await appendText(prompt);
+    }
+
+    async function actAsTeacher() {
+        const prompt = `You are an elite ______. And I am your student whom you must pass on your knowledge and expertise. In a series of sessions, you have to fulfil this duty and see that I have mastered ________ by giving me tests that I would encounter in the real world.\n\n`;
+        await appendText(prompt);
+    }
 
     function createQuestionFromTemplate(copiedText, templateName) {
         const template = templates[templateName];
