@@ -81,7 +81,8 @@
         "Explain": {
             "Concept": "explainConcept",
             "Interaction": "explainInteraction",
-            "Relationship": "explainRelationship"
+            "Relationship": "explainRelationship",
+            "Walkthrough": "explainWalkthrough"
         },
         "List": {
             "Verbs (Actions)": "listVerbs",
@@ -118,6 +119,7 @@
         "explainConcept": explainConcept,
         "explainInteraction": explainInteraction,
         "explainRelationship": explainRelationship,
+        "explainWalkthrough": explainWalkthrough,
         "listVerbs": listVerbs,
         "listNouns": listNouns,
         "listAdjectives": listAdjectives
@@ -218,6 +220,11 @@
 
     async function explainRelationship() {
         const prompt = 'Please explain the relationship:\n\n';
+        await appendText(prompt);
+    }
+
+    async function explainWalkthrough() {
+        const prompt = 'Please walk me through this:\n\n';
         await appendText(prompt);
     }
 
