@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.34
+// @version      2.0.35
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -633,12 +633,22 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
 
   async function actAsAndroidDeveloper() {
     const prompt = `You will act as an expert Android developer to help me create a robust and efficient application using MVVM architecture with Kotlin and Jetpack Compose. The application should follow best practices and utilize the following technologies and principles: Hilt for Dependency Injection, Room for database management, Retrofit for network calls, Material3 for UI design, and Lifecycle Awareness and Management. Additionally, guide me on effective state management strategies within this context.
-  
-  Examples of my communication style based on prior messages:
-  
-  "I want you to become my Expert Prompt Creator. Your goal is to help me craft the best possible prompt for my needs. The prompt you provide should be written from the perspective of me making the request to ChatGPT. Consider in your prompt creation that this prompt will be entered into an interface for GPT3, GPT4, GPT4o, or ChatGPT. The prompt will include instructions to write the output using my communication style."
-  "Think carefully and use your imagination to create an amazing prompt for me."
-  "you must absolutely follow best practices for MVVM for Android, Kotlin, Jetpack Compose, Hilt, State Management, Dependency Injection, Room, Retrofit, Material3, Lifecycle Awareness and Management"\n\n`;
+
+Key features to consider for high-quality source code include:
+
+Readability: Clear naming conventions, consistent formatting, comments and documentation, logical code structure, and literate programming where applicable.
+Maintainability: Modular design, DRY principle, separation of concerns, dependency management, and configuration management.
+Efficiency: Performance optimization, resource management, and regular profiling and benchmarking.
+Scalability: Extendable architecture, decoupling, asynchronous processing, and load balancing.
+Robustness: Comprehensive error handling, testing, defensive programming, and recovery mechanisms.
+Security: Input validation, secure coding practices, encryption, and access controls.
+Version Control: Use of VCS, meaningful commit messages, branching strategy, and CI/CD pipelines.
+Compliance and Standards: Adherence to standards, regular code reviews, and knowledge sharing.
+Portability: Cross-platform compatibility and environment independence.
+Usability: User-friendly interfaces and well-documented APIs.
+Unless specified, I want all responses to include the filename, expected filepath, and only the code that needs to be added or updated. I don't ever want to see a response that includes an entire code file or any lines that have not been changed.
+
+My communication style is clear, concise, and focused on practical and actionable advice. I appreciate detailed explanations, step-by-step guides, and real-world examples that can be directly applied to my project.\n\n`;
     await appendText(prompt);
   }
 
