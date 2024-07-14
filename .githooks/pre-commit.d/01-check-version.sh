@@ -22,14 +22,6 @@ get_last_committed_version() {
   git show HEAD:"$file" 2>/dev/null | grep -Eo '// @version\s+[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $3}' || echo "0.0.0"
 }
 
-# Function to increment the version number
-increment_version() {
-  local version="$1"
-  IFS='.' read -r -a parts <<< "$version"
-  parts[2]=$((parts[2] + 1))
-  echo "${parts[0]}.${parts[1]}.${parts[2]}"
-}
-
 # Determine the project root directory
 PROJECT_ROOT="$(git rev-parse --show-toplevel)"
 if [ $? -ne 0 ]; then
@@ -65,17 +57,8 @@ for file in $STAGED_JS_FILES; do
 
       # Compare the versions
       if [ "$CURRENT_VERSION" = "$LAST_VERSION" ]; then
-        echo -e "${YELLOW}The version number has not been incremented in $file${NC}"
-        read -p "Would you like to increment the version number? (y/n): " choice
-        if [ "$choice" = "y" ]; then
-          NEW_VERSION=$(increment_version "$CURRENT_VERSION")
-          sed -i "s|// @version $CURRENT_VERSION|// @version $NEW_VERSION|" "$file"
-          git add "$file"
-          echo -e "${GREEN}Version number in $file updated to $NEW_VERSION and staged.${NC}"
-        else
-          echo -e "${RED}Error: Version number has not been incremented in $file${NC}"
-          exit 1
-        fi
+        echo -e "${RED}Error: Version number has not been incremented in $file${NC}"
+        exit 1
       fi
     else
       echo -e "${YELLOW}No version header found in $file${NC}"
