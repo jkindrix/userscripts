@@ -13,13 +13,21 @@ NC='\033[0m' # No Color
 # Function to extract the version number from a file
 get_version() {
   local file="$1"
-  grep -Eo '@version\s+[0-9]+\.[0-9]+\.[0-9]+' "$file" | awk '{print $2}'
+  grep -Eo '// @version\s+[0-9]+\.[0-9]+\.[0-9]+' "$file" | awk '{print $3}'
 }
 
 # Function to get the last committed version of a file
 get_last_committed_version() {
   local file="$1"
-  git show HEAD:"$file" 2>/dev/null | grep -Eo '@version\s+[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $2}' || echo "0.0.0"
+  git show HEAD:"$file" 2>/dev/null | grep -Eo '// @version\s+[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $3}' || echo "0.0.0"
+}
+
+# Function to increment the version number
+increment_version() {
+  local version="$1"
+  IFS='.' read -r -a parts <<< "$version"
+  parts[2]=$((parts[2] + 1))
+  echo "${parts[0]}.${parts[1]}.${parts[2]}"
 }
 
 # Determine the project root directory
@@ -45,7 +53,7 @@ fi
 # Process each staged JS file
 for file in $STAGED_JS_FILES; do
   if [ -f "$file" ]; then
-    if grep -q '@version' "$file"; then
+    if grep -q '// @version' "$file"; then
       echo -e "${CYAN}Processing file: $file${NC}"
 
       LAST_VERSION=$(get_last_committed_version "$file")
@@ -57,8 +65,17 @@ for file in $STAGED_JS_FILES; do
 
       # Compare the versions
       if [ "$CURRENT_VERSION" = "$LAST_VERSION" ]; then
-        echo -e "${RED}Error: Version number has not been incremented in $file${NC}"
-        exit 1
+        echo -e "${YELLOW}The version number has not been incremented in $file${NC}"
+        read -p "Would you like to increment the version number? (y/n): " choice
+        if [ "$choice" = "y" ]; then
+          NEW_VERSION=$(increment_version "$CURRENT_VERSION")
+          sed -i "" "s|// @version $CURRENT_VERSION|// @version $NEW_VERSION|" "$file"
+          git add "$file"
+          echo -e "${GREEN}Version number in $file updated to $NEW_VERSION and staged.${NC}"
+        else
+          echo -e "${RED}Error: Version number has not been incremented in $file${NC}"
+          exit 1
+        fi
       fi
     else
       echo -e "${YELLOW}No version header found in $file${NC}"
