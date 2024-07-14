@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# ANSI color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Determine the project root directory
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+if [ $? -ne 0 ]; then
+  echo -e "${RED}Failed to determine project root directory.${NC}"
+  exit 1
+fi
+
+# Change to the project root directory
+cd "$PROJECT_ROOT" || exit
+
+# Directory containing the hook scripts
+HOOKS_DIR="$PROJECT_ROOT/.githooks/pre-commit.d"
+
+# Function to execute each script and colorize the output
+execute_hook() {
+  local hook="$1"
+  echo -e "${CYAN}Executing $hook...${NC}"
+  if "$hook"; then
+    echo -e "${GREEN}Success: $hook executed successfully.${NC}"
+  else
+    echo -e "${RED}Error: $hook failed.${NC}"
+    exit 1
+  fi
+}
+
+# Ensure all files in the hooks directory are executable
+chmod +x "$HOOKS_DIR"/*
+
+# Execute each script in the hooks directory
+for hook in "$HOOKS_DIR"/*; do
+  if [ -x "$hook" ]; then
+    execute_hook "$hook"
+  else
+    echo -e "${YELLOW}Warning: $hook is not executable and will be skipped.${NC}"
+  fi
+done
+
+echo -e "${GREEN}All hooks executed successfully.${NC}"
+exit 0
