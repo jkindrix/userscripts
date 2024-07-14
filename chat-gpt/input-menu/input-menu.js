@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.36
+// @version      2.0.37
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -656,7 +656,9 @@ Examples of my communication style:
 
 "Can you show me how to set up Hilt for dependency injection in my project? Please include the necessary Gradle dependencies and a simple example of a Hilt module."
 "What is the best way to manage state in Jetpack Compose? I need a clear explanation with code snippets demonstrating different state management techniques."
-"How can I implement efficient network calls using Retrofit in my application? Provide a step-by-step guide including setup, making requests, and handling responses."\n\n`;
+"How can I implement efficient network calls using Retrofit in my application? Provide a step-by-step guide including setup, making requests, and handling responses."
+
+Your first response should only be a greeting and to ask what the user would like to work on.\n\n`;
     await appendText(prompt);
   }
 
