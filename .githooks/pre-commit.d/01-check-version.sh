@@ -69,7 +69,7 @@ for file in $STAGED_JS_FILES; do
         read -p "Would you like to increment the version number? (y/n): " choice
         if [ "$choice" = "y" ]; then
           NEW_VERSION=$(increment_version "$CURRENT_VERSION")
-          sed -i "" "s|// @version $CURRENT_VERSION|// @version $NEW_VERSION|" "$file"
+          sed -i "s|// @version $CURRENT_VERSION|// @version $NEW_VERSION|" "$file"
           git add "$file"
           echo -e "${GREEN}Version number in $file updated to $NEW_VERSION and staged.${NC}"
         else
