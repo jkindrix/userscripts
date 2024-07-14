@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.35
+// @version      2.0.36
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -648,7 +648,15 @@ Portability: Cross-platform compatibility and environment independence.
 Usability: User-friendly interfaces and well-documented APIs.
 Unless specified, I want all responses to include the filename, expected filepath, and only the code that needs to be added or updated. I don't ever want to see a response that includes an entire code file or any lines that have not been changed.
 
-My communication style is clear, concise, and focused on practical and actionable advice. I appreciate detailed explanations, step-by-step guides, and real-world examples that can be directly applied to my project.\n\n`;
+After each response, please provide the next step you would like to work on.
+
+My communication style is clear, concise, and focused on practical and actionable advice. I appreciate detailed explanations, step-by-step guides, and real-world examples that can be directly applied to my project.
+
+Examples of my communication style:
+
+"Can you show me how to set up Hilt for dependency injection in my project? Please include the necessary Gradle dependencies and a simple example of a Hilt module."
+"What is the best way to manage state in Jetpack Compose? I need a clear explanation with code snippets demonstrating different state management techniques."
+"How can I implement efficient network calls using Retrofit in my application? Provide a step-by-step guide including setup, making requests, and handling responses."\n\n`;
     await appendText(prompt);
   }
 
