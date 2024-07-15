@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.37
+// @version      2.0.38
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -135,6 +135,9 @@
       'Product Manager': 'actAsProductManager',
       'Android Developer': 'actAsAndroidDeveloper'
     },
+    Environment: {
+      Android: 'androidDevelopmentEnvironment'
+    }
   };
 
   const functionMap = {
@@ -204,6 +207,7 @@
     actAsDevOpsEngineer,
     actAsProductManager,
     actAsAndroidDeveloper,
+    androidDevelopmentEnvironment
   };
 
   const templates = {
@@ -628,6 +632,99 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
   async function actAsProductManager() {
     const prompt =
       '## Act as Product Manager\n\nYou will act as a Product Manager. Your goal is to provide strategic product planning, user stories, and feature prioritization. Start by asking what specific product or feature needs to be addressed.\n\n';
+    await appendText(prompt);
+  }
+
+  async function androidDevelopmentEnvironment() {
+    const text = `## My Development Environment
+
+IDE:
+- Android Studio
+
+Project Type:
+- Android Application
+
+Language:
+- Kotlin (not Java)
+
+Frameworks and Libraries:
+- AndroidX (Android Jetpack)
+- Jetpack Compose
+- Hilt
+    - Hilt Navigation Compose
+- Material3
+    - Material3 Adaptive Navigation
+    - Material Icons Extended
+- Room
+- Retrofit
+- KSP (not kapt)
+- Detekt
+- KtLint
+- DataStore (Not SharedPreferences)
+- Junit
+- JwtDecode
+- EspressoCore
+- CoilCompose
+- Accompanist
+
+Architecture:
+- MVVM
+
+Compiler:
+- Compile Sdk Version: 34
+- Build Tools Version: 34.0.0
+- Source Compatibility: $JavaVersion.VERSION_17
+- Target Compatibility: $JavaVersion.VERSION_17
+- Application Id: us.mobileapp.drtalbotsmom_androidcompose
+- Target SDK Version: 34
+- Min SDK Version: 24
+- Test Instrumentation Runner Class Name: androidx.test.runner.AndroidJUnitRunner
+
+Dependencies:
+- com.google.accompanist:accompanist-permissions:0.34.0	implementation
+- androidx.activity:activity-compose:1.9.0	implementation
+- com.google.auto.service:auto-service:1.1.1	annotationProcessor
+- com.google.auto.service:auto-service:1.1.1	ksp
+- io.coil-kt:coil-compose:2.6.0	implementation
+- androidx.compose:compose-bom:2024.06.00	implementation
+- androidx.compose:compose-bom:2024.06.00	androidTestImplementation
+- io.github.boguszpawlowski.composecalendar:composecalendar:1.3.0	implementation
+- com.squareup.retrofit2:converter-gson:2.11.0	implementation
+- androidx.core:core-ktx:1.13.1	implementation
+- androidx.core:core-splashscreen:1.0.1	implementation
+- androidx.datastore:datastore-core:1.1.1	implementation
+- androidx.datastore:datastore-preferences:1.1.1	implementation
+- com.android.tools:desugar_jdk_libs:2.0.4	coreLibraryDesugaring
+- androidx.test.espresso:espresso-core:3.6.1	androidTestImplementation
+- com.google.dagger:hilt-android-compiler:2.51.1	implementation
+- com.google.dagger:hilt-android-compiler:2.51.1	ksp
+- com.google.dagger:hilt-android:2.51.1	implementation
+- androidx.hilt:hilt-navigation-compose:1.2.0	implementation
+- javax.annotation:javax.annotation-api:1.3.2	implementation
+- androidx.test.ext:junit:1.2.1	androidTestImplementation
+- junit:junit:4.13.2	testImplementation
+- com.auth0.android:jwtdecode:2.0.2	implementation
+- androidx.lifecycle:lifecycle-runtime-ktx:2.8.3	implementation
+- androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3	implementation
+- androidx.compose.material:material-icons-extended:1.6.8	implementation
+- androidx.compose.material3:material3-adaptive-navigation-suite:1.3.0-beta04	implementation
+- androidx.compose.material3:material3-window-size-class:1.2.1	implementation
+- androidx.compose.material3:material3:1.2.1	implementation
+- androidx.navigation:navigation-compose:2.7.7	implementation
+- androidx.navigation:navigation-runtime-ktx:2.7.7	implementation
+- com.squareup.retrofit2:retrofit:2.11.0	implementation
+- androidx.room:room-compiler:2.6.1	annotationProcessor
+- androidx.room:room-compiler:2.6.1	ksp
+- androidx.room:room-ktx:2.6.1	implementation
+- androidx.room:room-runtime:2.6.1	implementation
+- androidx.room:room-runtime:2.6.1	implementation
+- androidx.compose.runtime:runtime-livedata:1.6.8	implementation
+- androidx.compose.ui:ui	implementation
+- androidx.compose.ui:ui-graphics	implementation
+- androidx.compose.ui:ui-test-junit4	androidTestImplementation
+- androidx.compose.ui:ui-test-manifest	debugImplementation
+- androidx.compose.ui:ui-tooling	debugImplementation
+- androidx.compose.ui:ui-tooling-preview	implementation`;
     await appendText(prompt);
   }
 
