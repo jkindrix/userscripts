@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.38
+// @version      2.0.39
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -636,7 +636,7 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
   }
 
   async function androidDevelopmentEnvironment() {
-    const text = `## My Development Environment
+    const prompt = `## My Development Environment
 
 IDE:
 - Android Studio
