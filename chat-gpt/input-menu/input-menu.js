@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.39
+// @version      2.0.40
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -644,6 +644,9 @@ IDE:
 Project Type:
 - Android Application
 
+Project Status:
+- All dependencies, frameworks, and libraries are already correctly installed and have been validation working
+
 Language:
 - Kotlin (not Java)
 
@@ -724,7 +727,9 @@ Dependencies:
 - androidx.compose.ui:ui-test-junit4	androidTestImplementation
 - androidx.compose.ui:ui-test-manifest	debugImplementation
 - androidx.compose.ui:ui-tooling	debugImplementation
-- androidx.compose.ui:ui-tooling-preview	implementation`;
+- androidx.compose.ui:ui-tooling-preview	implementation
+
+In an Android app that's already setup to use Kotlin, Jetpack Compose, Navigation Compose, Hilt, Room, and Retrofit what is the best practice way to handle the following:\n\n`;
     await appendText(prompt);
   }
 
