@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.40
+// @version      2.0.41
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -45,6 +45,9 @@
       Analyze: {
         'Identify Code Smells': 'identifyCodeSmells',
         'Security Vulnerabilities': 'analyzeSecurityVulnerabilities',
+      },
+      Behavior: {
+        'Be Succinct': 'beSuccinct'
       },
       Create: {
         Application: {
@@ -145,6 +148,7 @@
     ensureBestPractices,
     toggleFormal,
     toggleConcise,
+    beSuccinct,
     openFileHeaderModal,
     addComments,
     addDocstring,
@@ -232,6 +236,11 @@
     } else {
       log('Input field not found.');
     }
+  }
+
+  async function beSuccinct() {
+    const prompt = 'Be succinct for this response. I only need to see the new code or code that needs to change. Do not send all of the code.\n\n'
+    await appendText(prompt);
   }
 
   async function addComments() {
