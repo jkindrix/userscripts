@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.42
+// @version      2.0.43
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -645,7 +645,7 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
   }
 
   async function androidDevelopmentEnvironment() {
-    const prompt = `In an Android app that's already setup to use Kotlin, Jetpack Compose, Navigation Compose, Material3, KSP, DataStores, Hilt, Room, and Retrofit with an MVVM architecture, what is the best practice way to handle the following:\n\n`;
+    const prompt = `In an Android app that's already setup, configured, and verified fully working to use Kotlin, Jetpack Compose, Navigation Compose, Material3, KSP, DataStores, Hilt, Room, and Retrofit with an MVVM architecture, what is the best practice way to handle the following:\n\n`;
     await appendText(prompt);
   }
 
