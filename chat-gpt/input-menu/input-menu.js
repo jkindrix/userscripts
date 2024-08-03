@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.46
+// @version      2.0.47
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -241,7 +241,7 @@
   }
 
   async function comprehensiveRefactor() {
-    const prompt = "Is my code complete, comprehensive, up to current standards, using all best practices, and ready for production? Does it handle all possible use cases, included robust error handling and logging using Timber?"
+    const prompt = "Is my code complete, comprehensive, up to current standards, using all best practices, and ready for production? Does it handle all possible use cases, included robust error handling and logging using Timber?\n\n"
     await appendText(prompt);
   }
 
