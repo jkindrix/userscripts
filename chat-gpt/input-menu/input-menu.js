@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.47
+// @version      2.0.48
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -399,17 +399,68 @@ the prompt in the Revised prompt section until I say we are done.\n\n`;
   }
 
   async function listAdjectives() {
-    const prompt = 'Please generate a list of adjectives (properties):\n\n';
+    const prompt = `
+  ## Instructions
+  
+  You will act as an expert in the relevant field. Confirm that the following list includes every possible conceivable and imaginable item within the specified category. Respond with either "yes" or "no." If your answer is "no," begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. Ensure that you do not repeat any items that already exist. Verify carefully that no items are repeated.
+  
+  ## Examples of my communication style:
+  
+  1. "Confirm that this is every possible conceivable and imaginable item within the specified category. Respond with either 'yes' or 'no.' If your answer is 'no,' begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. DO NOT REPEAT ANY ITEMS THAT ALREADY EXIST. VERIFY YOU HAVEN'T REPEATED ANYTHING."
+  2. "I need detailed and exhaustive responses to ensure nothing is overlooked. Double-check for accuracy and completeness."
+  3. "Please provide a comprehensive and thorough analysis. Make sure to cover all possible scenarios."
+  
+  ## The List Type
+  
+  Adjectives
+  
+  ## The Expected List items
+  
+  `;
     await appendText(prompt);
   }
 
   async function listNouns() {
-    const prompt = 'Please generate a list of nouns (objects):\n\n';
+    const prompt = `
+  ## Instructions
+  
+  You will act as an expert in the relevant field. Confirm that the following list includes every possible conceivable and imaginable item within the specified category. Respond with either "yes" or "no." If your answer is "no," begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. Ensure that you do not repeat any items that already exist. Verify carefully that no items are repeated.
+  
+  ## Examples of my communication style:
+  
+  1. "Confirm that this is every possible conceivable and imaginable item within the specified category. Respond with either 'yes' or 'no.' If your answer is 'no,' begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. DO NOT REPEAT ANY ITEMS THAT ALREADY EXIST. VERIFY YOU HAVEN'T REPEATED ANYTHING."
+  2. "I need detailed and exhaustive responses to ensure nothing is overlooked. Double-check for accuracy and completeness."
+  3. "Please provide a comprehensive and thorough analysis. Make sure to cover all possible scenarios."
+  
+  ## The List Type
+  
+  Nouns
+  
+  ## The Expected List items
+
+  `;
     await appendText(prompt);
   }
 
   async function listVerbs() {
-    const prompt = 'Please generate a list of verbs (actions):\n\n';
+    const prompt = `
+  ## Instructions
+  
+  You will act as an expert in the relevant field. Confirm that the following list includes every possible conceivable and imaginable item within the specified category. Respond with either "yes" or "no." If your answer is "no," begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. Ensure that you do not repeat any items that already exist. Verify carefully that no items are repeated.
+  
+  ## Examples of my communication style:
+  
+  1. "Confirm that this is every possible conceivable and imaginable item within the specified category. Respond with either 'yes' or 'no.' If your answer is 'no,' begin listing every item that is missing from the list, categorizing them appropriately, and do not stop generating until every possible item has been listed. DO NOT REPEAT ANY ITEMS THAT ALREADY EXIST. VERIFY YOU HAVEN'T REPEATED ANYTHING."
+  2. "I need detailed and exhaustive responses to ensure nothing is overlooked. Double-check for accuracy and completeness."
+  3. "Please provide a comprehensive and thorough analysis. Make sure to cover all possible scenarios."
+  
+  ## The List Type
+  
+  Verbs
+  
+  ## The Expected List items
+
+  `;
     await appendText(prompt);
   }
 
