@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.48
+// @version      2.0.49
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -63,6 +63,7 @@
       },
       Refactor: {
         Comprehensive: "comprehensiveRefactor",
+        Quality: "qualityRefactor",
         Modularize: {
           Classes: 'modularizeClasses',
           Functions: 'modularizeFunctions',
@@ -213,7 +214,8 @@
     actAsProductManager,
     actAsAndroidDeveloper,
     androidDevelopmentEnvironment,
-    comprehensiveRefactor
+    comprehensiveRefactor,
+    qualityRefactor
   };
 
   const templates = {
@@ -238,6 +240,238 @@
     } else {
       log('Input field not found.');
     }
+  }
+
+  async function qualityRefactor() {
+    const prompt = `
+## Production-ready code quality checks for a single \`*.kt\` file
+
+### **Code Quality**
+- **Code Readability**:
+  - Ensure code is easy to read and understand.
+  - Use meaningful and descriptive variable, function, and class names.
+  - Ensure the file is not excessively long; split it if it handles multiple responsibilities.
+  - Add meaningful comments within complex blocks of code.
+  - Maintain consistent indentation and spacing throughout the file.
+
+- **Single Responsibility Principle (SRP)**:
+  - Adhere to SRP, where each class or function has one clear responsibility.
+  - Avoid combining unrelated functionality in the same file.
+  - Ensure the file name reflects the single responsibility principle.
+
+- **Avoid Code Duplication**:
+  - Identify and refactor any duplicated code by extracting common logic into reusable functions or classes.
+  - Follow the DRY (Don't Repeat Yourself) principle to minimize code repetition.
+
+- **Proper Use of Modifiers**:
+  - Use \`private\`, \`internal\`, \`protected\`, and \`public\` access modifiers appropriately.
+  - Use \`final\` (default in Kotlin) where necessary to prevent unintended inheritance.
+  - Verify the use of the \`open\` modifier for classes intended to be extended.
+
+- **Error Handling**:
+  - Implement robust error handling with meaningful error messages to aid debugging.
+  - Define and use custom exceptions where needed instead of generic exceptions.
+  - Ensure that error messages in exception handling do not leak internal implementation details.
+
+- **Concurrency & Parallelism**:
+  - Handle concurrency properly, especially when using coroutines; protect shared resources (e.g., using \`Mutex\` or \`synchronized\`).
+  - Use coroutine scopes appropriately, ensuring they are tied to the correct lifecycles.
+
+- **Logging**:
+  - Place logging appropriately (e.g., info, debug, error levels) without exposing sensitive data.
+  - Assess the performance impact of excessive logging in critical paths.
+
+- **Cyclomatic Complexity**:
+  - Measure cyclomatic complexity and refactor functions that are overly complex to improve maintainability.
+  - Define an acceptable threshold for cyclomatic complexity and use automated tools to measure it.
+
+- **Exception Propagation**:
+  - Propagate exceptions correctly when necessary, and avoid catching exceptions that should be handled by higher-level logic.
+  - Verify that exception propagation does not expose sensitive information.
+
+- **Dependency Management**:
+  - Use and version external libraries appropriately, avoiding unnecessary dependencies.
+
+### **Kotlin Best Practices**
+- **Idiomatic Kotlin**:
+  - Use Kotlin idioms, such as \`let\`, \`apply\`, \`run\`, \`with\`, and \`also\` functions for scoped operations.
+  - Avoid using nullables unless necessary, and handle them safely with \`?.\`, \`?:\`, \`!!\`, or Kotlin’s \`null safety\` mechanisms.
+  - Use the \`with\` function for applying multiple operations on the same object when applicable.
+
+- **Data Classes**:
+  - Use \`data class\` for classes that primarily hold data.
+  - Ensure data classes implement \`equals\`, \`hashCode\`, and \`toString\` where appropriate (though Kotlin auto-generates these).
+
+- **Sealed Classes & Enums**:
+  - Use \`sealed class\` or \`enum class\` for representing a restricted set of types or states.
+  - Ensure exhaustive \`when\` expressions by including all possible cases or a default case.
+  - Use sealed classes for representing hierarchies of types known at compile-time.
+
+- **Extension Functions**:
+  - Prefer extension functions over utility classes for adding functionality to existing classes.
+  - Avoid overusing extension functions when they obscure the intended use of the class or function.
+
+- **Immutability**:
+  - Use \`val\` over \`var\` wherever possible to ensure immutability.
+  - Ensure collections are read-only (\`List\`, \`Map\`, \`Set\` instead of \`MutableList\`, \`MutableMap\`, \`MutableSet\`).
+
+- **Type Inference**:
+  - Leverage Kotlin’s type inference instead of explicitly declaring types unless it enhances readability.
+  - Balance type inference with explicit type declarations to improve readability, especially in complex expressions.
+
+- **Avoid Platform Types**:
+  - Avoid platform types when interacting with Java code, and ensure nullability is correctly handled.
+
+- **Coroutines & Flow**:
+  - Use coroutines properly for asynchronous operations, avoiding blocking code.
+  - Use \`Flow\` for handling streams of data where reactive programming is needed.
+  - Manage coroutines using structured concurrency for better control.
+
+- **Domain-Specific Language (DSL)**:
+  - Utilize Kotlin DSLs effectively where applicable, making the code more readable and expressive.
+
+- **Null Safety**:
+  - Ensure comprehensive null safety throughout the code, making sure no nullable types are overlooked or mishandled.
+  - Use \`lateinit\` sparingly and only when initialization cannot be done at the point of declaration.
+
+- **Functional Programming Practices**:
+  - Encourage the use of functional programming constructs, such as higher-order functions and immutability, where they enhance code clarity and reduce side effects.
+
+- **Avoiding Overuse of \`apply\` and Similar Functions**:
+  - Use scoped functions like \`apply\`, \`let\`, and \`also\` judiciously, ensuring they do not obscure code readability.
+
+- **Use of \`when\` over \`if-else\`**:
+  - Leverage the \`when\` expression over \`if-else\` chains for better readability and exhaustiveness.
+
+- **Avoid Magic Numbers**:
+  - Avoid magic numbers by using constants or enums.
+  - Avoid "magic strings" by using constants.
+
+### **Performance Optimization**
+- **Efficient Loops & Collections**:
+  - Use loops and collection operations (\`map\`, \`filter\`, \`reduce\`, etc.) efficiently.
+  - Avoid unnecessary intermediate collections by using sequences where appropriate.
+  - Review the use of \`forEach\` vs. other iteration methods in terms of performance.
+
+- **Avoiding Unnecessary Object Creation**:
+  - Minimize the creation of unnecessary objects, especially within loops or frequently called methods.
+
+- **Lazy Initialization**:
+  - Use \`lazy\` initialization for properties that are expensive to create and are not always needed.
+
+- **Caching & Memoization**:
+  - Cache results of expensive operations or use memoization where appropriate.
+
+- **Asynchronous Operations**:
+  - Use asynchronous operations correctly to avoid blocking the main thread, especially in UI components.
+  - Implement structured concurrency to manage coroutines effectively.
+
+- **Profiling for Garbage Collection**:
+  - Regularly profile for excessive garbage collection, which could indicate memory management issues.
+  - Integrate performance profiling as part of the CI/CD pipeline.
+
+- **Efficient Data Structures**:
+  - Select the most efficient data structures for the task, ensuring optimal performance.
+
+- **Avoid Reflection**:
+  - Minimize the use of reflection or other runtime evaluations that might degrade performance.
+
+### **Security Considerations**
+- **Sensitive Data Handling**:
+  - Ensure sensitive data (e.g., API keys, passwords) is not hardcoded in the file.
+  - Avoid logging sensitive information.
+  - Use environment variables or secure storage mechanisms for sensitive data.
+
+- **Proper Exception Handling**:
+  - Handle all exceptions appropriately, especially when dealing with external input or resources.
+  - Avoid using generic exception catches like \`catch (Exception)\` without specific handling logic.
+  - Ensure that error messages in exception handling do not leak internal implementation details.
+
+- **Injection Prevention**:
+  - Protect dynamic SQL, command execution, or other inputs against injection attacks.
+  - Use parameterized queries or prepared statements in database operations.
+
+- **Input Validation**:
+  - Validate and sanitize all external inputs to prevent vulnerabilities like XSS or SQL Injection.
+
+- **Secure API Calls**:
+  - Ensure that any external API calls or web requests are secure, using HTTPS and handling potential vulnerabilities such as man-in-the-middle attacks.
+
+- **Encryption**:
+  - Use proper encryption for storing or transmitting sensitive data.
+
+### **Documentation & Comments**
+- **KDoc Comments**:
+  - Provide proper KDoc comments for public classes, functions, and properties, explaining their purpose, parameters, and return values.
+  - Ensure comments are clear, concise, and accurate.
+
+- **Code Comments**:
+  - Use inline comments sparingly to explain non-obvious logic or decisions.
+  - Remove commented-out code and unnecessary comments that do not add value.
+  - Avoid redundant comments that merely restate what the code does.
+
+- **TODOs & Fixmes**:
+  - Address any \`TODO\` or \`FIXME\` comments before the code goes to production.
+  - Track any remaining \`TODO\` items in your issue management system.
+
+- **Assumptions Documentation**:
+  - Clearly document any assumptions made in the code.
+  - Document known limitations and edge cases that may affect the code's behavior.
+
+- **Provide Examples**:
+  - Provide examples in the documentation for complex or non-intuitive functions.
+
+### **Testing**
+- **Unit Tests**:
+  - Ensure that functions and classes in the file have corresponding unit tests.
+  - Test edge cases, null cases, and expected failures adequately.
+  - Maintain a consistent test naming convention to improve clarity.
+
+- **Mocking & Stubbing**:
+  - Use appropriate mocking and stubbing for dependencies to isolate unit tests.
+
+- **Property-Based Testing**:
+  - Consider using property-based testing for functions that should work for a wide range of inputs.
+
+- **Integration & End-to-End Testing**:
+  - Include integration tests or end-to-end tests if the file interacts with external systems or other modules.
+
+- **Code Coverage**:
+  - Ensure code coverage metrics meet project standards.
+  - Integrate code coverage tools with build systems to enforce coverage thresholds.
+
+### **Formatting & Consistency**
+- **Code Style Consistency**:
+  - Follow the project’s coding conventions (e.g., 4-space indentation, consistent bracket usage).
+  - Use Kotlin’s \`ktlint\` or IntelliJ’s code style formatting to maintain consistency.
+
+- **Function Length & Complexity**:
+  - Ensure functions are not excessively long or complex; refactor into smaller, more manageable functions if needed.
+  - Avoid deeply nested code by using early returns or guards.
+  - Set a guideline for the maximum recommended function length (e.g., 20-30 lines).
+
+- **Consistent Naming Conventions**:
+  - Follow consistent naming conventions for classes, methods, variables, and constants (e.g., camelCase for functions and variables, PascalCase for classes).
+
+- **Proper File Naming**:
+  - Ensure the file name accurately reflects its contents (e.g., a file containing \`UserViewModel\` should be named \`UserViewModel.kt\`).
+
+- **Whitespace & Newlines**:
+  - Remove unnecessary whitespace or blank lines.
+  - Use consistent newlines around functions, classes, and control flow structures.
+
+- **Uniform Line Length**:
+  - Ensure that lines of code do not exceed a recommended maximum length (typically 100-120 characters) to maintain readability.
+  - Implement automated checks (like \`ktlint\`) to enforce line length restrictions.
+
+- **Review Imports**:
+  - Review imports to ensure there are no unused imports and that they are organized.
+  - Group and order imports consistently (e.g., standard library imports first, followed by third-party, then project-specific imports).
+
+- **Consistent Nullability Handling**:
+  - Use a consistent approach for handling nullability in method signatures and property declarations.\n\n
+`;
+    await appendText(prompt);
   }
 
   async function comprehensiveRefactor() {
