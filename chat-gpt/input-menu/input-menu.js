@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         🛠️ ChatGPT Input Menu
 // @namespace    https://github.com/jkindrix/userscripts
-// @version      2.0.49
+// @version      2.0.50
 // @description  Creates a custom right-click menu for ChatGPT message input area with chatgpt.js integration
 // @author       Justin Kindrix
 // @match        *://chat.openai.com/*
@@ -64,6 +64,7 @@
       Refactor: {
         Comprehensive: "comprehensiveRefactor",
         Quality: "qualityRefactor",
+        Duplication: "duplicationRefactor",
         Modularize: {
           Classes: 'modularizeClasses',
           Functions: 'modularizeFunctions',
@@ -215,7 +216,8 @@
     actAsAndroidDeveloper,
     androidDevelopmentEnvironment,
     comprehensiveRefactor,
-    qualityRefactor
+    qualityRefactor,
+    duplicationRefactor
   };
 
   const templates = {
@@ -240,6 +242,11 @@
     } else {
       log('Input field not found.');
     }
+  }
+
+  async function duplicationRefactor() {
+    const promp = `Scan and comprehensively review for duplication:\n\n`
+    await appendText(prompt);
   }
 
   async function qualityRefactor() {
